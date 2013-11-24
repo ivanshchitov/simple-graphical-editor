@@ -37,13 +37,10 @@ public class MainWindow extends JFrame {
      */
     private void initMenus() {
         JMenu fileMenu = new JMenu("File");
-        JMenuItem clearMenuItem = new JMenuItem("Clear");
-        fileMenu.add(clearMenuItem);
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        fileMenu.add(exitMenuItem);
+        fileMenu.add(new JMenuItem("Clear"));
+        fileMenu.add(new JMenuItem("Exit"));
         JMenu aboutMenu = new JMenu("Help");
-        JMenuItem helpMenuItem = new JMenuItem("About");
-        aboutMenu.add(helpMenuItem);
+        aboutMenu.add(new JMenuItem("About"));
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
         menuBar.add(aboutMenu);
