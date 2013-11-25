@@ -23,15 +23,15 @@ public class MainWindowFrame extends JFrame {
     /**
      * Panel for painting.
      */
-    final JPanel paintPanel = new JPanel();
+    final private JPanel paintPanel = new JPanel();
     /**
      * Toolbar for choose shape.
      */
-    final JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
+    final private JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
     /**
      * Toolbar for choose colo.
      */
-    final JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
+    final private JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
 
     /**
      * Default constructor.
