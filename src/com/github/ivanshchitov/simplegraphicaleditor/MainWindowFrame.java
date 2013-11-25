@@ -7,8 +7,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Color;
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * Class for display main window application.
@@ -17,6 +20,18 @@ import java.awt.BorderLayout;
  * Time: 18:58
  */
 public class MainWindowFrame extends JFrame {
+    /**
+     * Panel for painting.
+     */
+    final JPanel paintPanel = new JPanel();
+    /**
+     * Toolbar for choose shape.
+     */
+    final JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
+    /**
+     * Toolbar for choose colo.
+     */
+    final JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
 
     /**
      * Default constructor.
@@ -27,8 +42,10 @@ public class MainWindowFrame extends JFrame {
         initMenus();
         initShapeToolBar();
         initColorToolBar();
+        initPanel();
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addComponentListener(createComponentAdapter());
         setVisible(true);
     }
 
@@ -51,28 +68,28 @@ public class MainWindowFrame extends JFrame {
      * Initializes toolbar for choose shape.
      */
     private void initShapeToolBar() {
-        JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
         toolBar.add(new JButton(new ImageIcon("res/rect.png")));
         toolBar.add(new JButton(new ImageIcon("res/circle.png")));
         toolBar.add(new JButton(new ImageIcon("res/line.png")));
-        toolBar.setBounds(0, 0, 40, this.getHeight());
-        add(toolBar);
+        toolBar.setSize(40, this.getHeight());
+        toolBar.setFloatable(false);
+        add(toolBar, BorderLayout.EAST);
     }
 
     /**
      * Initializes toolbar fo choose color.
      */
     private void initColorToolBar() {
-        JToolBar jtoolBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
-        jtoolBar.add(createButton(Color.red, 15, 5, 20, 20));
-        jtoolBar.add(createButton(Color.blue, 45, 5, 20, 20));
-        jtoolBar.add(createButton(Color.yellow, 75, 5, 20, 20));
-        jtoolBar.add(createButton(Color.green, 105, 5, 20, 20));
-        jtoolBar.add(createButton(Color.black, 135, 5, 20, 20));
-        jtoolBar.add(createButton(Color.white, 165, 5, 20, 20));
-        jtoolBar.setLayout(null);
-        jtoolBar.setBounds(40, 0, this.getWidth(), 30);
-        add(jtoolBar);
+        colorBar.add(createButton(Color.red, 50, 5, 20, 20));
+        colorBar.add(createButton(Color.blue, 80, 5, 20, 20));
+        colorBar.add(createButton(Color.yellow, 110, 5, 20, 20));
+        colorBar.add(createButton(Color.green, 140, 5, 20, 20));
+        colorBar.add(createButton(Color.black, 170, 5, 20, 20));
+        colorBar.add(createButton(Color.white, 200, 5, 20, 20));
+        colorBar.setLayout(null);
+        colorBar.setFloatable(false);
+        colorBar.setSize(this.getWidth(), 30);
+        add(colorBar, BorderLayout.NORTH);
     }
 
     /**
@@ -89,5 +106,29 @@ public class MainWindowFrame extends JFrame {
         button.setBackground(color);
         button.setBounds(x, y, width, height);
         return button;
+    }
+
+    /**
+     * Initializes panel for painting.
+     */
+    private void initPanel() {
+        paintPanel.setBackground(Color.white);
+        paintPanel.setSize(this.getWidth(), this.getHeight());
+        add(paintPanel, BorderLayout.CENTER);
+    }
+
+    /**
+     * Creates component listener, where override componentResized method.
+     * @return new component adapter
+     */
+    private ComponentAdapter createComponentAdapter() {
+        return new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
+                toolBar.setSize(40, e.getComponent().getHeight());
+                colorBar.setSize(e.getComponent().getWidth(), 30);
+            }
+        };
     }
 }
