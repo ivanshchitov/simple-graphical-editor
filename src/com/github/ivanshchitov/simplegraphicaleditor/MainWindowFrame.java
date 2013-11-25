@@ -16,12 +16,12 @@ import java.awt.BorderLayout;
  * Date: 24.11.13
  * Time: 18:58
  */
-public class MainWindow extends JFrame {
+public class MainWindowFrame extends JFrame {
 
     /**
      * Default constructor.
      */
-    public MainWindow() {
+    public MainWindowFrame() {
         super("Simple Graphical Editor");
         setSize(500, 500);
         initMenus();
