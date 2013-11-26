@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 /**
- * Yellow circle object.
- * @author Ivan Shchitov
+ * Class - circle object.
+ * User: Ivan Shchitov. <polotenchik1992@gmail.com>
+ * Date: 26.11.13
+ * Time: 19:58
  */
 public class Circle extends JPanel {
     /**
