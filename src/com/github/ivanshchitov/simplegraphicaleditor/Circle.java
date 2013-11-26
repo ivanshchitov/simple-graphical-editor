@@ -23,7 +23,6 @@ public class Circle extends JPanel {
      * Radius of circle.
      */
     private final int radius;
-
     /**
      * Color of circle.
      */
@@ -36,21 +35,17 @@ public class Circle extends JPanel {
      * @param radius radius of circle
      * @param color color of circle
      */
-    Circle(int x, int y, int radius, Color color) {
+    public Circle(int x, int y, int radius, Color color) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
     }
 
-    /**
-     * Paints a circle.
-     * @param graphics the Graphics context in which to paint
-     */
     @Override
     public void paint(Graphics graphics) {
-        graphics.setColor(color);
-        graphics.drawOval(x, y, radius, radius);
+        graphics.setColor(this.color);
+        graphics.drawOval(this.x, this.y, this.radius, this.radius);
     }
 
     /**
@@ -59,6 +54,6 @@ public class Circle extends JPanel {
      */
     public void setColor(Color color) {
         this.color = color;
-        repaint();
+        this.repaint();
     }
 }
