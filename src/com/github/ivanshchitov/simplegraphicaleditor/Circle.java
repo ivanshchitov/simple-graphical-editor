@@ -29,9 +29,9 @@ public class Circle extends JPanel {
     private Color color;
 
     /**
-     * Constructor.
-     * @param x axis X offset
-     * @param y axis Y offset
+     * Constructor, which initializes all fields of class.
+     * @param x x-coordinate
+     * @param y y-coordinate
      * @param radius radius of circle
      * @param color color of circle
      */
