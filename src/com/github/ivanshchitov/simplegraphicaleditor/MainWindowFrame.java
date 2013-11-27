@@ -9,12 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 /**
  * Class for display main window application.
@@ -35,7 +33,6 @@ public class MainWindowFrame extends JFrame {
      * Toolbar for choose colo.
      */
     private final JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
-
     /**
      * Layered pane to accommodate the panel of painting.
      */
@@ -54,7 +51,7 @@ public class MainWindowFrame extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addComponentListener(createComponentAdapter());
-        addMouseListener(createMouseAdapter());
+        addMouseListener(new MouseHandler(paintPanel, layeredPane));
         setVisible(true);
     }
 
@@ -140,35 +137,6 @@ public class MainWindowFrame extends JFrame {
                 colorBar.setSize(e.getComponent().getWidth(), 30);
                 layeredPane.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
                 paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
-            }
-        };
-    }
-
-    private MouseAdapter createMouseAdapter() {
-        return new MouseAdapter() {
-            int x, y;
-            @Override
-            public void mousePressed(MouseEvent e) {
-                x = e.getX();
-                y = e.getY();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                int x1 = x, y1 = y, x2 = e.getX(), y2 = e.getY();
-                if (x1 > e.getX()) {
-                    x2 = x1; x1 = e.getX();
-                }
-                if (y1 > e.getY()) {
-                    y2 = y1; y1 = e.getY();
-                }
-                paintPanel.add(new Line(x2, y2, e.getX(), e.getY(), Color.black));
-                paintPanel.add(new Circle(x1, y1,
-                        (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
-                                        + Math.pow(Math.abs(y2 - y1), 2)),
-                        Color.green));
-                paintPanel.add(new Rectangle(x1, y1, x2 - x1, y2 - y1, Color.red));
-                layeredPane.revalidate();
             }
         };
     }
