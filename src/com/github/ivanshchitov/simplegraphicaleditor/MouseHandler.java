@@ -55,12 +55,46 @@ public class MouseHandler extends MouseAdapter {
         if (y1 > e.getY()) {
             y2 = y1; y1 = e.getY();
         }
-        paintPanel.add(new Line(x2, y2, e.getX(), e.getY(), Color.black));
-        paintPanel.add(new Circle(x1, y1,
-                (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
-                        + Math.pow(Math.abs(y2 - y1), 2)),
-                Color.green));
-        paintPanel.add(new Rectangle(x1, y1, x2 - x1, y2 - y1, Color.red));
+        paintLine(x, y, e.getX(), e.getY(), Color.black);
+        paintCircle(x1, y1, x2, y2, Color.black);
+        paintRectangle(x1, y1, x2, y2, Color.black);
         layeredPane.revalidate();
     };
+
+    /**
+     * Adds line in paint panel.
+     * @param x1 start x-coordinate
+     * @param y1 start y-coordinate
+     * @param x2 finish x-coordinate
+     * @param y2 finish y-coordinate
+     * @param color color of line
+     */
+    private void paintLine(int x1, int y1, int x2, int y2, Color color) {
+        paintPanel.add(new Line(x1, y1, x2, y2, color));
+    }
+
+    /**
+     * Adds circle in paint panel.
+     * @param x1 start x-coordinate
+     * @param y1 start y-coordinate
+     * @param x2 finish x-coordinate
+     * @param y2 finish y-coordinate
+     * @param color color of circle
+     */
+    private void paintCircle(int x1, int y1, int x2, int y2, Color color) {
+        paintPanel.add(new Circle(x1, y1, (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
+                        + Math.pow(Math.abs(y2 - y1), 2)), color));
+    }
+
+    /**
+     * Adds rectangle in paint panel.
+     * @param x1 start x-coordinate
+     * @param y1 start y-coordinate
+     * @param x2 finish x-coordinate
+     * @param y2 finish y-coordinate
+     * @param color color of rectangle
+     */
+    private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
+        paintPanel.add(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
+    }
 }
