@@ -12,6 +12,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Class for display main window application.
@@ -128,6 +130,25 @@ public class MainWindowFrame extends JFrame {
                 paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
                 toolBar.setSize(40, e.getComponent().getHeight());
                 colorBar.setSize(e.getComponent().getWidth(), 30);
+            }
+        };
+    }
+
+    private MouseAdapter createMouseAdapter() {
+        return new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
             }
         };
     }

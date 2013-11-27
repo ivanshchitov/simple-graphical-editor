@@ -22,7 +22,7 @@ public class Rectangle extends JPanel {
     /**
      * Weight of rectangle.
      */
-    private final int weight;
+    private final int width;
     /**
      * Height of rectangle.
      */
@@ -36,14 +36,14 @@ public class Rectangle extends JPanel {
      * Constructor, which initializes all fields of class.
      * @param x x-coordinate
      * @param y y-coordinate
-     * @param weight weight of rectangle
+     * @param width width of rectangle
      * @param height height of rectangle
      * @param color color of rectangle
      */
-    public Rectangle(int x, int y, int weight, int height, Color color) {
+    public Rectangle(int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
-        this.weight = weight;
+        this.width = width;
         this.height = height;
         this.color = color;
     }
@@ -51,7 +51,7 @@ public class Rectangle extends JPanel {
     @Override
     public void paint(Graphics graphics) {
         graphics.setColor(this.color);
-        graphics.drawRect(this.x, this.y, this.weight, this.height);
+        graphics.drawRect(this.x, this.y, this.width, this.height);
     }
 
     /**
