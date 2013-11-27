@@ -1,8 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Class - line object.
@@ -49,9 +48,10 @@ public class Line extends JPanel {
     }
 
     @Override
-    public void paint(Graphics graphics) {
-        graphics.setColor(this.color);
-        graphics.drawLine(this.x1, this.y1, this.x2, this.y2);
+    public void paintComponent(Graphics graphics) {
+        Graphics2D g2 = (Graphics2D) graphics;
+        g2.setColor(this.color);
+        g2.drawLine(this.x1, this.y1, this.x2, this.y2);
     }
 
     /**

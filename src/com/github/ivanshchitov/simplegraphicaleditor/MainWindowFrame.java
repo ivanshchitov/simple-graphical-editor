@@ -8,12 +8,13 @@ import javax.swing.JToolBar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import javax.swing.JLayeredPane;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /**
  * Class for display main window application.
@@ -25,15 +26,20 @@ public class MainWindowFrame extends JFrame {
     /**
      * Panel for painting.
      */
-    final private JPanel paintPanel = new JPanel();
+    private final JPanel paintPanel = new JPanel();
     /**
      * Toolbar for choose shape.
      */
-    final private JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
+    private final JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
     /**
      * Toolbar for choose colo.
      */
-    final private JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
+    private final JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
+
+    /**
+     * Layered pane to accommodate the panel of painting.
+     */
+    private JLayeredPane layeredPane = new JLayeredPane();
 
     /**
      * Default constructor.
@@ -44,10 +50,11 @@ public class MainWindowFrame extends JFrame {
         initMenus();
         initShapeToolBar();
         initColorToolBar();
-        initPanel();
+        initLayeredPane();
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addComponentListener(createComponentAdapter());
+        addMouseListener(createMouseAdapter());
         setVisible(true);
     }
 
@@ -111,14 +118,16 @@ public class MainWindowFrame extends JFrame {
     }
 
     /**
-     * Initializes panel for painting.
+     * Initializes layered pane.
      */
-    private void initPanel() {
+    private void initLayeredPane() {
+        add(layeredPane, BorderLayout.CENTER);
+        layeredPane.setBounds(0, 0, this.getWidth(), this.getHeight());
+        paintPanel.setLayout(new BorderLayout());
+        paintPanel.setBounds(0, -40, this.getWidth(), this.getHeight());
         paintPanel.setBackground(Color.white);
-        paintPanel.setSize(this.getWidth(), this.getHeight());
-        add(paintPanel, BorderLayout.CENTER);
+        layeredPane.add(paintPanel, new Integer(0), 0);
     }
-
     /**
      * Creates component listener, where override componentResized method.
      * @return new component adapter
@@ -127,28 +136,29 @@ public class MainWindowFrame extends JFrame {
         return new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
                 toolBar.setSize(40, e.getComponent().getHeight());
                 colorBar.setSize(e.getComponent().getWidth(), 30);
+                layeredPane.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
+                paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
             }
         };
     }
 
     private MouseAdapter createMouseAdapter() {
         return new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-
+            int x1, y1, x2, y2;
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                x1 = e.getX();
+                y1 = e.getY();
+                x2 = e.getX();
+                y2 = e.getY();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                super.mouseReleased(e);
+                paintPanel.add(new Line(x2, y2, e.getX(), e.getY(), Color.black));
+                layeredPane.revalidate();
             }
         };
     }
