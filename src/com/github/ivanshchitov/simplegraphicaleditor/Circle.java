@@ -1,8 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Class - circle object.
@@ -44,8 +43,9 @@ public class Circle extends JPanel {
 
     @Override
     public void paint(Graphics graphics) {
-        graphics.setColor(this.color);
-        graphics.drawOval(this.x, this.y, this.radius, this.radius);
+        Graphics2D g2 = (Graphics2D) graphics;
+        g2.setColor(this.color);
+        g2.drawOval(this.x, this.y, this.radius, this.radius);
     }
 
     /**

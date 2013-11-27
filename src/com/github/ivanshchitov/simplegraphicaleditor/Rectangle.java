@@ -1,8 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Class - rectangle object.
@@ -50,8 +49,9 @@ public class Rectangle extends JPanel {
 
     @Override
     public void paint(Graphics graphics) {
-        graphics.setColor(this.color);
-        graphics.drawRect(this.x, this.y, this.width, this.height);
+        Graphics2D g2 = (Graphics2D) graphics;
+        g2.setColor(this.color);
+        g2.drawRect(this.x, this.y, this.width, this.height);
     }
 
     /**

@@ -146,18 +146,28 @@ public class MainWindowFrame extends JFrame {
 
     private MouseAdapter createMouseAdapter() {
         return new MouseAdapter() {
-            int x1, y1, x2, y2;
+            int x, y;
             @Override
             public void mousePressed(MouseEvent e) {
-                x1 = e.getX();
-                y1 = e.getY();
-                x2 = e.getX();
-                y2 = e.getY();
+                x = e.getX();
+                y = e.getY();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                int x1 = x, y1 = y, x2 = e.getX(), y2 = e.getY();
+                if (x1 > e.getX()) {
+                    x2 = x1; x1 = e.getX();
+                }
+                if (y1 > e.getY()) {
+                    y2 = y1; y1 = e.getY();
+                }
                 paintPanel.add(new Line(x2, y2, e.getX(), e.getY(), Color.black));
+                paintPanel.add(new Circle(x1, y1,
+                        (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
+                                        + Math.pow(Math.abs(y2 - y1), 2)),
+                        Color.green));
+                paintPanel.add(new Rectangle(x1, y1, x2 - x1, y2 - y1, Color.red));
                 layeredPane.revalidate();
             }
         };
