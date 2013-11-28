@@ -37,7 +37,9 @@ public class MouseHandler extends MouseAdapter {
      * Color of shape.
      */
     private Color mainColor;
-
+    /**
+     * Repository of shape.
+     */
     private ShapesRepository repository = new ShapesRepository();
 
     /**
@@ -138,10 +140,18 @@ public class MouseHandler extends MouseAdapter {
         System.out.println("Rects: " + repository.getCountRectangles());
     }
 
+    /**
+     * Sets drawing mode for shape.
+     * @param drawingMode new drawing mode
+     */
     public void setDrawingMode(int drawingMode) {
         this.drawingMode = drawingMode;
     }
 
+    /**
+     * Sets color shape.
+     * @param color new color
+     */
     public void setMainColor(Color color) {
         this.mainColor = color;
     }

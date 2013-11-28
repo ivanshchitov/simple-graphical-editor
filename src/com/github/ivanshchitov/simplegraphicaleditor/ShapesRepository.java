@@ -55,38 +55,74 @@ public class ShapesRepository {
         lines.add(line);
     }
 
+    /**
+     * Returns rectangle by index.
+     * @param index index of rectangle
+     * @return rectangle
+     */
     public Rectangle getRectangle(int index) {
         return rectangles.get(index);
     }
 
+    /**
+     * Returns circle by index.
+     * @param index index of circle
+     * @return circle
+     */
     public Circle getCircle(int index) {
         return circles.get(index);
     }
 
+    /**
+     * Returns line by index.
+     * @param index index of line
+     * @return line
+     */
     public Line getLine(int index) {
         return lines.get(index);
     }
 
+    /**
+     * Returns count of rectangles
+     * @return count of rectangles
+     */
     public int getCountRectangles() {
         return rectangles.size();
     }
 
+    /**
+     * Returns count of circles
+     * @return count of circles
+     */
     public int getCountCircles() {
         return circles.size();
     }
 
+    /**
+     * Returns count of lines
+     * @return count of lines
+     */
     public int getCountLines() {
         return lines.size();
     }
 
+    /**
+     * Removes last rectangle in list.
+     */
     public void removeLastRectangle() {
         rectangles.remove(rectangles.size() - 1);
     }
 
+    /**
+     * Removes last circle in list.
+     */
     public void removeLastCircle() {
         circles.remove(circles.size() - 1);
     }
 
+    /**
+     * Removes last line in list.
+     */
     public void removeLastLine() {
         lines.remove(lines.size() - 1);
     }

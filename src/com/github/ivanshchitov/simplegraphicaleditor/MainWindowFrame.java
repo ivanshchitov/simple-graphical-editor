@@ -117,16 +117,28 @@ public class MainWindowFrame extends JFrame {
         return clearMenuItem;
     }
 
+    /**
+     * Creates menu item for delete last rectangle.
+     * @return new menu item
+     */
     private JMenuItem createDeleteLastRectangleMenuItem() {
         JMenuItem deleteLastRectangle = new JMenuItem("Delete last rectangle");
         return deleteLastRectangle;
     }
 
+    /**
+     * Creates menu item for delete last circle.
+     * @return new menu item
+     */
     private JMenuItem createDeleteLastCircleMenuItem() {
         JMenuItem deleteLastCircle = new JMenuItem("Delete last circle");
         return deleteLastCircle;
     }
 
+    /**
+     * Creates menu item for delete last line.
+     * @return new menu item
+     */
     private JMenuItem createDeleteLastLineMenuItem() {
         JMenuItem deleteLastLine = new JMenuItem("Delete last line");
         return  deleteLastLine;
