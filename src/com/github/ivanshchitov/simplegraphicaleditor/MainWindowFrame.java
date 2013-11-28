@@ -32,7 +32,7 @@ public class MainWindowFrame extends JFrame {
      */
     private final JToolBar toolBar = new JToolBar("Toolbar", JToolBar.VERTICAL);
     /**
-     * Toolbar for choose colo.
+     * Toolbar for choose color.
      */
     private final JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
     /**
@@ -123,6 +123,16 @@ public class MainWindowFrame extends JFrame {
      */
     private JMenuItem createDeleteLastRectangleMenuItem() {
         JMenuItem deleteLastRectangle = new JMenuItem("Delete last rectangle");
+        deleteLastRectangle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paintPanel.remove(mouseHandler.getRepository().getRectangle(
+                        mouseHandler.getRepository().getCountRectangles() - 1));
+                mouseHandler.getRepository().removeLastRectangle();
+                System.out.println("Rects-: " + mouseHandler.getRepository().getCountRectangles());
+                paintPanel.repaint();
+            }
+        });
         return deleteLastRectangle;
     }
 
@@ -132,6 +142,16 @@ public class MainWindowFrame extends JFrame {
      */
     private JMenuItem createDeleteLastCircleMenuItem() {
         JMenuItem deleteLastCircle = new JMenuItem("Delete last circle");
+        deleteLastCircle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paintPanel.remove(mouseHandler.getRepository().getCircle(
+                        mouseHandler.getRepository().getCountCircles() - 1));
+                mouseHandler.getRepository().removeLastCircle();
+                System.out.println("Circles-: " + mouseHandler.getRepository().getCountCircles());
+                paintPanel.repaint();
+            }
+        });
         return deleteLastCircle;
     }
 
@@ -141,6 +161,16 @@ public class MainWindowFrame extends JFrame {
      */
     private JMenuItem createDeleteLastLineMenuItem() {
         JMenuItem deleteLastLine = new JMenuItem("Delete last line");
+        deleteLastLine.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paintPanel.remove(mouseHandler.getRepository().getLine(
+                        mouseHandler.getRepository().getCountLines() - 1));
+                mouseHandler.getRepository().removeLastLine();
+                System.out.println("Lines-: " + mouseHandler.getRepository().getCountLines());
+                paintPanel.repaint();
+            }
+        });
         return  deleteLastLine;
     }
 

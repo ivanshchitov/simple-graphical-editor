@@ -155,4 +155,12 @@ public class MouseHandler extends MouseAdapter {
     public void setMainColor(Color color) {
         this.mainColor = color;
     }
+
+    /**
+     * Returns shapes repository.
+     * @return repository
+     */
+    public ShapesRepository getRepository() {
+        return repository;
+    }
 }
