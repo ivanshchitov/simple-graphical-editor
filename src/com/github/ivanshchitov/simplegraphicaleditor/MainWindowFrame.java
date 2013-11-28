@@ -73,13 +73,28 @@ public class MainWindowFrame extends JFrame {
     private void initMenus() {
         JMenu fileMenu = new JMenu("File");
         fileMenu.add(new JMenuItem("Clear"));
-        fileMenu.add(new JMenuItem("Exit"));
+        fileMenu.add(createExitMenuItem());
         JMenu aboutMenu = new JMenu("Help");
         aboutMenu.add(new JMenuItem("About"));
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
         menuBar.add(aboutMenu);
         setJMenuBar(menuBar);
+    }
+
+    /**
+     * Creates menu item for exit from application.
+     * @return
+     */
+    private JMenuItem createExitMenuItem() {
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        return exitMenuItem;
     }
 
     /**
