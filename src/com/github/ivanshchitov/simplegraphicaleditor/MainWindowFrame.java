@@ -72,7 +72,7 @@ public class MainWindowFrame extends JFrame {
      */
     private void initMenus() {
         JMenu fileMenu = new JMenu("File");
-        fileMenu.add(new JMenuItem("Clear"));
+        fileMenu.add(createClearMenuItem());
         fileMenu.add(createExitMenuItem());
         JMenu aboutMenu = new JMenu("Help");
         aboutMenu.add(new JMenuItem("About"));
@@ -84,7 +84,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates menu item for exit from application.
-     * @return
+     * @return new menu item
      */
     private JMenuItem createExitMenuItem() {
         JMenuItem exitMenuItem = new JMenuItem("Exit");
@@ -95,6 +95,22 @@ public class MainWindowFrame extends JFrame {
             }
         });
         return exitMenuItem;
+    }
+
+    /**
+     * Creates menu item for clear paint panel.
+     * @return new menu item
+     */
+    private JMenuItem createClearMenuItem() {
+        JMenuItem clearMenuItem = new JMenuItem("Clear");
+        clearMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paintPanel.removeAll();
+                paintPanel.repaint();
+            }
+        });
+        return clearMenuItem;
     }
 
     /**
