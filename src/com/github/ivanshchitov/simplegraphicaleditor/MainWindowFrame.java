@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -51,7 +53,6 @@ public class MainWindowFrame extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addComponentListener(createComponentAdapter());
-        addMouseListener(new MouseHandler(paintPanel, layeredPane));
         setVisible(true);
     }
 
@@ -74,24 +75,41 @@ public class MainWindowFrame extends JFrame {
      * Initializes toolbar for choose shape.
      */
     private void initShapeToolBar() {
-        toolBar.add(new JButton(new ImageIcon("res/rect.png")));
-        toolBar.add(new JButton(new ImageIcon("res/circle.png")));
-        toolBar.add(new JButton(new ImageIcon("res/line.png")));
+        toolBar.add(createShapeButton("res/rect.png", 1));
+        toolBar.add(createShapeButton("res/circle.png", 2));
+        toolBar.add(createShapeButton("res/line.png", 3));
         toolBar.setSize(40, this.getHeight());
         toolBar.setFloatable(false);
         add(toolBar, BorderLayout.EAST);
     }
 
     /**
+     * Creates shape button.
+     * @param iconPath path to icon button
+     * @param drawMode drawing mode shape
+     * @return new shape button
+     */
+    private JButton createShapeButton(String iconPath, final int drawMode) {
+        JButton button = new JButton(new ImageIcon(iconPath));
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addMouseListener(new MouseHandler(paintPanel, layeredPane, drawMode));
+            }
+        });
+        return button;
+    }
+
+    /**
      * Initializes toolbar fo choose color.
      */
     private void initColorToolBar() {
-        colorBar.add(createButton(Color.red, 50, 5, 20, 20));
-        colorBar.add(createButton(Color.blue, 80, 5, 20, 20));
-        colorBar.add(createButton(Color.yellow, 110, 5, 20, 20));
-        colorBar.add(createButton(Color.green, 140, 5, 20, 20));
-        colorBar.add(createButton(Color.black, 170, 5, 20, 20));
-        colorBar.add(createButton(Color.white, 200, 5, 20, 20));
+        colorBar.add(createColorButton(Color.red, 50, 5, 20, 20));
+        colorBar.add(createColorButton(Color.blue, 80, 5, 20, 20));
+        colorBar.add(createColorButton(Color.yellow, 110, 5, 20, 20));
+        colorBar.add(createColorButton(Color.green, 140, 5, 20, 20));
+        colorBar.add(createColorButton(Color.black, 170, 5, 20, 20));
+        colorBar.add(createColorButton(Color.white, 200, 5, 20, 20));
         colorBar.setLayout(null);
         colorBar.setFloatable(false);
         colorBar.setSize(this.getWidth(), 30);
@@ -107,7 +125,7 @@ public class MainWindowFrame extends JFrame {
      * @param height  the new height of this component
      * @return new button
      */
-    private JButton createButton(Color color, int x, int y, int width, int height) {
+    private JButton createColorButton(Color color, int x, int y, int width, int height) {
         JButton button = new JButton();
         button.setBackground(color);
         button.setBounds(x, y, width, height);
