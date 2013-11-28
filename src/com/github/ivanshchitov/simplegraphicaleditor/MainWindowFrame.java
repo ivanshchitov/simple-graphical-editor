@@ -9,8 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -39,6 +38,18 @@ public class MainWindowFrame extends JFrame {
      * Layered pane to accommodate the panel of painting.
      */
     private JLayeredPane layeredPane = new JLayeredPane();
+    /**
+     * Color button, where displayed current color.
+     */
+    private JButton mainColorButton = new JButton();
+    /**
+     * Current shape mode.
+     */
+    private int mainMode = 1;
+    /**
+     * Current color.
+     */
+    private Color mainColor = Color.black;
 
     /**
      * Default constructor.
@@ -86,15 +97,16 @@ public class MainWindowFrame extends JFrame {
     /**
      * Creates shape button.
      * @param iconPath path to icon button
-     * @param drawMode drawing mode shape
+     * @param shapeMode drawing mode shape
      * @return new shape button
      */
-    private JButton createShapeButton(String iconPath, final int drawMode) {
+    private JButton createShapeButton(String iconPath, final int shapeMode) {
         JButton button = new JButton(new ImageIcon(iconPath));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addMouseListener(new MouseHandler(paintPanel, layeredPane, drawMode));
+                mainMode = shapeMode;
+                addMouseListener(new MouseHandler(paintPanel, layeredPane, mainMode, mainColor));
             }
         });
         return button;
@@ -104,12 +116,14 @@ public class MainWindowFrame extends JFrame {
      * Initializes toolbar fo choose color.
      */
     private void initColorToolBar() {
-        colorBar.add(createColorButton(Color.red, 50, 5, 20, 20));
-        colorBar.add(createColorButton(Color.blue, 80, 5, 20, 20));
-        colorBar.add(createColorButton(Color.yellow, 110, 5, 20, 20));
-        colorBar.add(createColorButton(Color.green, 140, 5, 20, 20));
-        colorBar.add(createColorButton(Color.black, 170, 5, 20, 20));
-        colorBar.add(createColorButton(Color.white, 200, 5, 20, 20));
+        mainColorButton.setBackground(mainColor);
+        mainColorButton.setBounds(50, 4, 21, 21);
+        colorBar.add(mainColorButton);
+        colorBar.add(createColorButton(Color.red, 80, 5, 18, 18));
+        colorBar.add(createColorButton(Color.blue, 110, 5, 18, 18));
+        colorBar.add(createColorButton(Color.yellow, 140, 5, 18, 18));
+        colorBar.add(createColorButton(Color.green, 170, 5, 18, 18));
+        colorBar.add(createColorButton(Color.black, 200, 5, 18, 18));
         colorBar.setLayout(null);
         colorBar.setFloatable(false);
         colorBar.setSize(this.getWidth(), 30);
@@ -125,10 +139,18 @@ public class MainWindowFrame extends JFrame {
      * @param height  the new height of this component
      * @return new button
      */
-    private JButton createColorButton(Color color, int x, int y, int width, int height) {
+    private JButton createColorButton(final Color color, int x, int y, int width, int height) {
         JButton button = new JButton();
         button.setBackground(color);
         button.setBounds(x, y, width, height);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainColor = color;
+                mainColorButton.setBackground(mainColor);
+                addMouseListener(new MouseHandler(paintPanel, layeredPane, mainMode, mainColor));
+            }
+        });
         return button;
     }
 
@@ -143,6 +165,7 @@ public class MainWindowFrame extends JFrame {
         paintPanel.setBackground(Color.white);
         layeredPane.add(paintPanel, new Integer(0), 0);
     }
+
     /**
      * Creates component listener, where override componentResized method.
      * @return new component adapter

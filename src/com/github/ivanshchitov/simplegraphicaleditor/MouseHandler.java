@@ -33,16 +33,21 @@ public class MouseHandler extends MouseAdapter {
      * Drawing mode fo shape.
      */
     private int drawingMode;
+    /**
+     * Color of shape.
+     */
+    private Color mainColor;
 
     /**
      * Constructor.
      * @param paintPanel panel for painting shapes
      * @param layeredPane layered pane to accommodate the panel of painting
      */
-    public MouseHandler(JPanel paintPanel, JLayeredPane layeredPane, int drawingMode) {
+    public MouseHandler(JPanel paintPanel, JLayeredPane layeredPane, int drawingMode, Color color) {
         this.paintPanel = paintPanel;
         this.layeredPane = layeredPane;
         this.drawingMode = drawingMode;
+        this.mainColor = color;
     }
 
     @Override
@@ -62,19 +67,19 @@ public class MouseHandler extends MouseAdapter {
         }
         switch (drawingMode) {
             case 1:
-                paintRectangle(x1, y1, x2, y2, Color.black);
+                paintRectangle(x1, y1, x2, y2, mainColor);
                 break;
             case 2:
-                paintCircle(x1, y1, x2, y2, Color.black);
+                paintCircle(x1, y1, x2, y2, mainColor);
                 break;
             case 3:
-                paintLine(x, y, e.getX(), e.getY(), Color.black);
+                paintLine(x, y, e.getX(), e.getY(), mainColor);
                 break;
             default:
                 break;
         }
         layeredPane.revalidate();
-    };
+    }
 
     /**
      * Adds line in paint panel.
