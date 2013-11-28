@@ -65,6 +65,21 @@ public class MouseHandler extends MouseAdapter {
         if (y1 > e.getY()) {
             y2 = y1; y1 = e.getY();
         }
+        if (drawingMode == 3) {
+            paintShape(x, y, e.getX(), e.getY());
+        } else {
+            paintShape(x1, y1, x2, y2);
+        }
+    }
+
+    /**
+     * Paints shape by drawing mode.
+     * @param x1 start x-coordinate
+     * @param y1 start y-coordinate
+     * @param x2 finish x-coordinate
+     * @param y2 finish y-coordinate
+     */
+    private void paintShape(int x1, int y1, int x2, int y2) {
         switch (drawingMode) {
             case 1:
                 paintRectangle(x1, y1, x2, y2, mainColor);
@@ -73,14 +88,13 @@ public class MouseHandler extends MouseAdapter {
                 paintCircle(x1, y1, x2, y2, mainColor);
                 break;
             case 3:
-                paintLine(x, y, e.getX(), e.getY(), mainColor);
+                paintLine(x1, y1, x2, y2, mainColor);
                 break;
             default:
                 break;
         }
         layeredPane.revalidate();
     }
-
     /**
      * Adds line in paint panel.
      * @param x1 start x-coordinate
