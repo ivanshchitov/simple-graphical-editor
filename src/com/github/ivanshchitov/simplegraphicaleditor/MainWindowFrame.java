@@ -44,13 +44,9 @@ public class MainWindowFrame extends JFrame {
      */
     private JButton mainColorButton = new JButton();
     /**
-     * Current shape mode.
+     * Mouse handler.
      */
-    private int mainMode = 1;
-    /**
-     * Current color.
-     */
-    private Color mainColor = Color.black;
+    private MouseHandler mouseHandler;
 
     /**
      * Default constructor.
@@ -58,12 +54,14 @@ public class MainWindowFrame extends JFrame {
     public MainWindowFrame() {
         super("Simple Graphical Editor");
         setSize(500, 500);
-        initMenus();
         initShapeToolBar();
         initColorToolBar();
         initLayeredPane();
+        mouseHandler = new MouseHandler(paintPanel, layeredPane);
+        initMenus();
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addMouseListener(mouseHandler);
         addComponentListener(createComponentAdapter());
         setVisible(true);
     }
@@ -75,10 +73,15 @@ public class MainWindowFrame extends JFrame {
         JMenu fileMenu = new JMenu("File");
         fileMenu.add(createClearMenuItem());
         fileMenu.add(createExitMenuItem());
+        JMenu editMenu = new JMenu("Edit");
+        editMenu.add(createDeleteLastRectangleMenuItem());
+        editMenu.add(createDeleteLastCircleMenuItem());
+        editMenu.add(createDeleteLastLineMenuItem());
         JMenu aboutMenu = new JMenu("Help");
         aboutMenu.add(new JMenuItem("About"));
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
+        menuBar.add(editMenu);
         menuBar.add(aboutMenu);
         setJMenuBar(menuBar);
     }
@@ -114,6 +117,21 @@ public class MainWindowFrame extends JFrame {
         return clearMenuItem;
     }
 
+    private JMenuItem createDeleteLastRectangleMenuItem() {
+        JMenuItem deleteLastRectangle = new JMenuItem("Delete last rectangle");
+        return deleteLastRectangle;
+    }
+
+    private JMenuItem createDeleteLastCircleMenuItem() {
+        JMenuItem deleteLastCircle = new JMenuItem("Delete last circle");
+        return deleteLastCircle;
+    }
+
+    private JMenuItem createDeleteLastLineMenuItem() {
+        JMenuItem deleteLastLine = new JMenuItem("Delete last line");
+        return  deleteLastLine;
+    }
+
     /**
      * Initializes toolbar for choose shape.
      */
@@ -137,8 +155,7 @@ public class MainWindowFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainMode = shapeMode;
-                addMouseListener(new MouseHandler(paintPanel, layeredPane, mainMode, mainColor));
+                mouseHandler.setDrawingMode(shapeMode);
             }
         });
         return button;
@@ -148,7 +165,7 @@ public class MainWindowFrame extends JFrame {
      * Initializes toolbar fo choose color.
      */
     private void initColorToolBar() {
-        mainColorButton.setBackground(mainColor);
+        mainColorButton.setBackground(Color.black);
         mainColorButton.setBounds(50, 4, 21, 21);
         colorBar.add(mainColorButton);
         colorBar.add(createColorButton(Color.red, 80, 5, 18, 18));
@@ -178,9 +195,8 @@ public class MainWindowFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainColor = color;
-                mainColorButton.setBackground(mainColor);
-                addMouseListener(new MouseHandler(paintPanel, layeredPane, mainMode, mainColor));
+                mainColorButton.setBackground(color);
+                mouseHandler.setMainColor(color);
             }
         });
         return button;

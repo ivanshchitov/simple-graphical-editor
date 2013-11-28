@@ -12,23 +12,23 @@ public class ShapesRepository {
     /**
      * List of rectangles.
      */
-    private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+    private ArrayList<Rectangle> rectangles;
     /**
      * List of circles.
      */
-    private ArrayList<Circle> circles = new ArrayList<Circle>();
+    private ArrayList<Circle> circles;
     /**
      * List of lines.
      */
-    private ArrayList<Line> lines = new ArrayList<Line>();
+    private ArrayList<Line> lines;
 
     /**
      * Default constructor.
      */
     public ShapesRepository() {
-        rectangles = null;
-        circles = null;
-        lines = null;
+        rectangles = new ArrayList<Rectangle>(0);
+        circles = new ArrayList<Circle>(0);
+        lines = new ArrayList<Line>(0);
     }
 
     /**
@@ -53,5 +53,41 @@ public class ShapesRepository {
      */
     public void addLine(Line line) {
         lines.add(line);
+    }
+
+    public Rectangle getRectangle(int index) {
+        return rectangles.get(index);
+    }
+
+    public Circle getCircle(int index) {
+        return circles.get(index);
+    }
+
+    public Line getLine(int index) {
+        return lines.get(index);
+    }
+
+    public int getCountRectangles() {
+        return rectangles.size();
+    }
+
+    public int getCountCircles() {
+        return circles.size();
+    }
+
+    public int getCountLines() {
+        return lines.size();
+    }
+
+    public void removeLastRectangle() {
+        rectangles.remove(rectangles.size() - 1);
+    }
+
+    public void removeLastCircle() {
+        circles.remove(circles.size() - 1);
+    }
+
+    public void removeLastLine() {
+        lines.remove(lines.size() - 1);
     }
 }

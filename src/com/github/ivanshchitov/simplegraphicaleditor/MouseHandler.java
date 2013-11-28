@@ -24,11 +24,11 @@ public class MouseHandler extends MouseAdapter {
     /**
      * Panel for painting.
      */
-    private final JPanel paintPanel;
+    private JPanel paintPanel;
     /**
      * Layered pane to accommodate the panel of painting.
      */
-    private final JLayeredPane layeredPane;
+    private JLayeredPane layeredPane;
     /**
      * Drawing mode fo shape.
      */
@@ -38,16 +38,16 @@ public class MouseHandler extends MouseAdapter {
      */
     private Color mainColor;
 
+    private ShapesRepository repository = new ShapesRepository();
+
     /**
      * Constructor.
      * @param paintPanel panel for painting shapes
      * @param layeredPane layered pane to accommodate the panel of painting
      */
-    public MouseHandler(JPanel paintPanel, JLayeredPane layeredPane, int drawingMode, Color color) {
+    public MouseHandler(JPanel paintPanel, JLayeredPane layeredPane) {
         this.paintPanel = paintPanel;
         this.layeredPane = layeredPane;
-        this.drawingMode = drawingMode;
-        this.mainColor = color;
     }
 
     @Override
@@ -104,7 +104,9 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of line
      */
     private void paintLine(int x1, int y1, int x2, int y2, Color color) {
-        paintPanel.add(new Line(x1, y1, x2, y2, color));
+        repository.addLine(new Line(x1, y1, x2, y2, color));
+        paintPanel.add(repository.getLine(repository.getCountLines() - 1));
+        System.out.println("Lines: " + repository.getCountLines());
     }
 
     /**
@@ -116,8 +118,10 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of circle
      */
     private void paintCircle(int x1, int y1, int x2, int y2, Color color) {
-        paintPanel.add(new Circle(x1, y1, (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
-                        + Math.pow(Math.abs(y2 - y1), 2)), color));
+        repository.addCircle(new Circle(x1, y1, (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
+                + Math.pow(Math.abs(y2 - y1), 2)), color));
+        paintPanel.add(repository.getCircle(repository.getCountCircles() - 1));
+        System.out.println("Circs: " + repository.getCountCircles());
     }
 
     /**
@@ -129,6 +133,16 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of rectangle
      */
     private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
-        paintPanel.add(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
+        repository.addRectangle(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
+        paintPanel.add(repository.getRectangle(repository.getCountRectangles() - 1));
+        System.out.println("Rects: " + repository.getCountRectangles());
+    }
+
+    public void setDrawingMode(int drawingMode) {
+        this.drawingMode = drawingMode;
+    }
+
+    public void setMainColor(Color color) {
+        this.mainColor = color;
     }
 }
