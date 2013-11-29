@@ -1,10 +1,9 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Class - rectangle object.
@@ -16,19 +15,19 @@ public class Rectangle extends JPanel {
     /**
      * Axis X offset.
      */
-    private final int x;
+    private int x;
     /**
      * Axis Y offset.
      */
-    private final int y;
+    private int y;
     /**
      * Weight of rectangle.
      */
-    private final int width;
+    private int width;
     /**
      * Height of rectangle.
      */
-    private final int height;
+    private int height;
     /**
      * Color of rectangle.
      */

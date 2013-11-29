@@ -275,7 +275,8 @@ public class MainWindowFrame extends JFrame {
             public void componentResized(ComponentEvent e) {
                 toolBar.setSize(40, e.getComponent().getHeight());
                 colorBar.setSize(e.getComponent().getWidth(), 30);
-                paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
+                paintPanel.setBounds(toolBar.getWidth(), colorBar.getHeight(),
+                        e.getComponent().getWidth(), e.getComponent().getHeight());
             }
         };
     }
