@@ -110,6 +110,9 @@ public class MainWindowFrame extends JFrame {
         clearMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseHandler.getRepository().removeAllRectangles();
+                mouseHandler.getRepository().removeAllCircles();
+                mouseHandler.getRepository().removeAllLines();
                 paintPanel.removeAll();
                 paintPanel.repaint();
             }
@@ -129,7 +132,6 @@ public class MainWindowFrame extends JFrame {
                 paintPanel.remove(mouseHandler.getRepository().getRectangle(
                         mouseHandler.getRepository().getCountRectangles() - 1));
                 mouseHandler.getRepository().removeLastRectangle();
-                System.out.println("Rects-: " + mouseHandler.getRepository().getCountRectangles());
                 paintPanel.repaint();
             }
         });
@@ -148,7 +150,6 @@ public class MainWindowFrame extends JFrame {
                 paintPanel.remove(mouseHandler.getRepository().getCircle(
                         mouseHandler.getRepository().getCountCircles() - 1));
                 mouseHandler.getRepository().removeLastCircle();
-                System.out.println("Circles-: " + mouseHandler.getRepository().getCountCircles());
                 paintPanel.repaint();
             }
         });
@@ -167,7 +168,6 @@ public class MainWindowFrame extends JFrame {
                 paintPanel.remove(mouseHandler.getRepository().getLine(
                         mouseHandler.getRepository().getCountLines() - 1));
                 mouseHandler.getRepository().removeLastLine();
-                System.out.println("Lines-: " + mouseHandler.getRepository().getCountLines());
                 paintPanel.repaint();
             }
         });

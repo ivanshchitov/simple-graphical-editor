@@ -108,7 +108,6 @@ public class MouseHandler extends MouseAdapter {
     private void paintLine(int x1, int y1, int x2, int y2, Color color) {
         repository.addLine(new Line(x1, y1, x2, y2, color));
         paintPanel.add(repository.getLine(repository.getCountLines() - 1));
-        System.out.println("Lines: " + repository.getCountLines());
     }
 
     /**
@@ -123,7 +122,6 @@ public class MouseHandler extends MouseAdapter {
         repository.addCircle(new Circle(x1, y1, (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
                 + Math.pow(Math.abs(y2 - y1), 2)), color));
         paintPanel.add(repository.getCircle(repository.getCountCircles() - 1));
-        System.out.println("Circs: " + repository.getCountCircles());
     }
 
     /**
@@ -137,7 +135,6 @@ public class MouseHandler extends MouseAdapter {
     private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
         repository.addRectangle(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
         paintPanel.add(repository.getRectangle(repository.getCountRectangles() - 1));
-        System.out.println("Rects: " + repository.getCountRectangles());
     }
 
     /**

@@ -126,4 +126,25 @@ public class ShapesRepository {
     public void removeLastLine() {
         lines.remove(lines.size() - 1);
     }
+
+    /**
+     * Removes all rectangles in list.
+     */
+    public void removeAllRectangles() {
+        rectangles.clear();
+    }
+
+    /**
+     * Removes all circles in list.
+     */
+    public void removeAllCircles() {
+        circles.clear();
+    }
+
+    /**
+     * Removes all lines in list.
+     */
+    public void removeAllLines() {
+        lines.clear();
+    }
 }
