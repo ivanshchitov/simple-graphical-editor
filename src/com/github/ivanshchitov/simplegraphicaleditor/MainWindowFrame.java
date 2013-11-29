@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 
 /**
  * Class for display main window application.
@@ -73,7 +74,7 @@ public class MainWindowFrame extends JFrame {
         editMenu.add(createDeleteLastCircleMenuItem());
         editMenu.add(createDeleteLastLineMenuItem());
         JMenu aboutMenu = new JMenu("Help");
-        aboutMenu.add(new JMenuItem("About"));
+        aboutMenu.add(createAboutMenuItem());
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
@@ -183,6 +184,26 @@ public class MainWindowFrame extends JFrame {
             }
         });
         return  deleteLastLine;
+    }
+
+    /**
+     * Creates menu item for displaying information about application.
+     * @return new menu item
+     */
+    private JMenuItem createAboutMenuItem() {
+        JMenuItem aboutMenuItem = new JMenuItem("About");
+        final JFrame frame = this;
+        aboutMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new AboutDialog(frame, true);
+                } catch (IOException exception) {
+                    System.out.println("File with text about application not found.");
+                }
+            }
+        });
+        return aboutMenuItem;
     }
 
     /**

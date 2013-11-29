@@ -1,0 +1,7 @@
+Hello! This Simple Graphical Editor that allows
+   you to draw rectangles, circles and lines of
+     different colors, as well as delete them,
+            if you really want this.
+
+        But we all know very well that you
+            draw something to remove.=)
