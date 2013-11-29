@@ -2,6 +2,9 @@ package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 /**
  * Class - rectangle object.
@@ -52,14 +55,5 @@ public class Rectangle extends JPanel {
         Graphics2D g2 = (Graphics2D) graphics;
         g2.setColor(this.color);
         g2.drawRect(this.x, this.y, this.width, this.height);
-    }
-
-    /**
-     * Sets color of rectangle.
-     * @param color color of rectangle
-     */
-    public void setColor(Color color) {
-        this.color = color;
-        this.repaint();
     }
 }

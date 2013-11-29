@@ -8,7 +8,6 @@ import javax.swing.JToolBar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.BorderLayout;
@@ -37,10 +36,6 @@ public class MainWindowFrame extends JFrame {
      */
     private final JToolBar colorBar = new JToolBar("Colorbar", JToolBar.HORIZONTAL);
     /**
-     * Layered pane to accommodate the panel of painting.
-     */
-    private JLayeredPane layeredPane = new JLayeredPane();
-    /**
      * Color button, where displayed current color.
      */
     private JButton mainColorButton = new JButton();
@@ -57,12 +52,11 @@ public class MainWindowFrame extends JFrame {
         setSize(800, 600);
         initShapeToolBar();
         initColorToolBar();
-        initLayeredPane();
-        mouseHandler = new MouseHandler(paintPanel, layeredPane);
+        initPaintPanel();
+        mouseHandler = new MouseHandler(paintPanel);
         initMenus();
-        setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        addMouseListener(mouseHandler);
+        paintPanel.addMouseListener(mouseHandler);
         addComponentListener(createComponentAdapter());
         setVisible(true);
     }
@@ -198,9 +192,9 @@ public class MainWindowFrame extends JFrame {
         toolBar.add(createShapeButton("res/rect.png", 1));
         toolBar.add(createShapeButton("res/circle.png", 2));
         toolBar.add(createShapeButton("res/line.png", 3));
-        toolBar.setSize(40, this.getHeight());
         toolBar.setFloatable(false);
-        add(toolBar, BorderLayout.EAST);
+        toolBar.setBounds(0, 0, 40, getHeight());
+        add(toolBar);
     }
 
     /**
@@ -234,8 +228,8 @@ public class MainWindowFrame extends JFrame {
         colorBar.add(createColorButton(Color.black, 200, 5, 18, 18));
         colorBar.setLayout(null);
         colorBar.setFloatable(false);
-        colorBar.setSize(this.getWidth(), 30);
-        add(colorBar, BorderLayout.NORTH);
+        colorBar.setBounds(0, 0, getWidth(), 30);
+        add(colorBar);
     }
 
     /**
@@ -262,15 +256,13 @@ public class MainWindowFrame extends JFrame {
     }
 
     /**
-     * Initializes layered pane.
+     * Initializes panel for painting.
      */
-    private void initLayeredPane() {
-        add(layeredPane, BorderLayout.CENTER);
-        layeredPane.setBounds(0, 0, this.getWidth(), this.getHeight());
+    private void initPaintPanel() {
         paintPanel.setLayout(new BorderLayout());
-        paintPanel.setBounds(0, -40, this.getWidth(), this.getHeight());
+        paintPanel.setBounds(toolBar.getWidth(), colorBar.getHeight(), this.getWidth(), this.getHeight());
         paintPanel.setBackground(Color.white);
-        layeredPane.add(paintPanel, new Integer(0), 0);
+        add(paintPanel);
     }
 
     /**
@@ -283,7 +275,6 @@ public class MainWindowFrame extends JFrame {
             public void componentResized(ComponentEvent e) {
                 toolBar.setSize(40, e.getComponent().getHeight());
                 colorBar.setSize(e.getComponent().getWidth(), 30);
-                layeredPane.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
                 paintPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
             }
         };
