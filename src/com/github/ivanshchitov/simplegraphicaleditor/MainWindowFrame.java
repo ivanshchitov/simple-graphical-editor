@@ -54,7 +54,7 @@ public class MainWindowFrame extends JFrame {
      */
     public MainWindowFrame() {
         super("Simple Graphical Editor");
-        setSize(500, 500);
+        setSize(800, 600);
         initShapeToolBar();
         initColorToolBar();
         initLayeredPane();
