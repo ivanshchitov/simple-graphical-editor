@@ -110,21 +110,33 @@ public class ShapesRepository {
      * Removes last rectangle in list.
      */
     public void removeLastRectangle() {
-        rectangles.remove(rectangles.size() - 1);
+        if (rectangles.size() > 0) {
+            rectangles.remove(rectangles.size() - 1);
+        } else {
+            throw new ArrayIndexOutOfBoundsException("List of rectangles is empty.");
+        }
     }
 
     /**
      * Removes last circle in list.
      */
     public void removeLastCircle() {
-        circles.remove(circles.size() - 1);
+        if (circles.size() > 0) {
+            circles.remove(circles.size() - 1);
+        } else {
+            throw new ArrayIndexOutOfBoundsException("List of circles is empty.");
+        }
     }
 
     /**
      * Removes last line in list.
      */
     public void removeLastLine() {
-        lines.remove(lines.size() - 1);
+        if (lines.size() > 0) {
+            lines.remove(lines.size() - 1);
+        } else {
+            throw new ArrayIndexOutOfBoundsException("List of lines is empty.");
+        }
     }
 
     /**

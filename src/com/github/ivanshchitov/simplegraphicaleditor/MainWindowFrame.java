@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -126,13 +127,18 @@ public class MainWindowFrame extends JFrame {
      */
     private JMenuItem createDeleteLastRectangleMenuItem() {
         JMenuItem deleteLastRectangle = new JMenuItem("Delete last rectangle");
+        final JFrame frame = this;
         deleteLastRectangle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                paintPanel.remove(mouseHandler.getRepository().getRectangle(
-                        mouseHandler.getRepository().getCountRectangles() - 1));
-                mouseHandler.getRepository().removeLastRectangle();
-                paintPanel.repaint();
+                try {
+                    paintPanel.remove(mouseHandler.getRepository().getRectangle(
+                            mouseHandler.getRepository().getCountRectangles() - 1));
+                    mouseHandler.getRepository().removeLastRectangle();
+                    paintPanel.repaint();
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    JOptionPane.showMessageDialog(frame, "On the canvas, not rectangles.");
+                }
             }
         });
         return deleteLastRectangle;
@@ -144,13 +150,18 @@ public class MainWindowFrame extends JFrame {
      */
     private JMenuItem createDeleteLastCircleMenuItem() {
         JMenuItem deleteLastCircle = new JMenuItem("Delete last circle");
+        final JFrame frame = this;
         deleteLastCircle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                paintPanel.remove(mouseHandler.getRepository().getCircle(
-                        mouseHandler.getRepository().getCountCircles() - 1));
-                mouseHandler.getRepository().removeLastCircle();
-                paintPanel.repaint();
+                try {
+                    paintPanel.remove(mouseHandler.getRepository().getCircle(
+                            mouseHandler.getRepository().getCountCircles() - 1));
+                    mouseHandler.getRepository().removeLastCircle();
+                    paintPanel.repaint();
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    JOptionPane.showMessageDialog(frame, "On the canvas, not circles.");
+                }
             }
         });
         return deleteLastCircle;
@@ -162,13 +173,19 @@ public class MainWindowFrame extends JFrame {
      */
     private JMenuItem createDeleteLastLineMenuItem() {
         JMenuItem deleteLastLine = new JMenuItem("Delete last line");
+        final JFrame frame = this;
         deleteLastLine.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                paintPanel.remove(mouseHandler.getRepository().getLine(
-                        mouseHandler.getRepository().getCountLines() - 1));
-                mouseHandler.getRepository().removeLastLine();
-                paintPanel.repaint();
+                try {
+                    paintPanel.remove(mouseHandler.getRepository().getLine(
+                            mouseHandler.getRepository().getCountLines() - 1));
+                    mouseHandler.getRepository().removeLastLine();
+                    paintPanel.repaint();
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    JOptionPane.showMessageDialog(frame, "On the canvas, not lines.");
+                }
+
             }
         });
         return  deleteLastLine;
