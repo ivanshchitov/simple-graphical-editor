@@ -1,6 +1,6 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -52,14 +52,5 @@ public class Line extends JPanel {
         Graphics2D g2 = (Graphics2D) graphics;
         g2.setColor(this.color);
         g2.drawLine(this.x1, this.y1, this.x2, this.y2);
-    }
-
-    /**
-     * Sets color of line.
-     * @param color color of line
-     */
-    public void setColor(Color color) {
-        this.color = color;
-        this.repaint();
     }
 }
