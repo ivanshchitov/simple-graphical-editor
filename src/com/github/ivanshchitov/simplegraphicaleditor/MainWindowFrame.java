@@ -1,16 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JToolBar;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-import java.awt.Color;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -51,13 +42,13 @@ public class MainWindowFrame extends JFrame {
     public MainWindowFrame() {
         super("Simple Graphical Editor");
         setSize(800, 600);
+        initMenus();
         initShapeToolBar();
         initColorToolBar();
         initPaintPanel();
         mouseHandler = new MouseHandler(paintPanel);
-        initMenus();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         paintPanel.addMouseListener(mouseHandler);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         addComponentListener(createComponentAdapter());
         setVisible(true);
     }
@@ -303,8 +294,8 @@ public class MainWindowFrame extends JFrame {
         return new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                toolBar.setSize(40, e.getComponent().getHeight());
-                colorBar.setSize(e.getComponent().getWidth(), 30);
+                toolBar.setBounds(0, 0, 40, e.getComponent().getHeight());
+                colorBar.setBounds(0, 0, e.getComponent().getWidth(), 30);
                 paintPanel.setBounds(toolBar.getWidth(), colorBar.getHeight(),
                         e.getComponent().getWidth(), e.getComponent().getHeight());
                 paintPanel.revalidate();

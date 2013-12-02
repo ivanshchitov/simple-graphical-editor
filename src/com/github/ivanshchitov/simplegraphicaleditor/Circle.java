@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javafx.scene.shape.*;
 
 /**
  * Class - circle object.
@@ -42,7 +43,9 @@ public class Circle extends JPanel {
         this.y = y;
         this.radius = radius;
         this.color = color;
+        //setBounds(this.x, this.y, this.radius * this.radius, this.radius * this.radius);
         setBounds(this.x, this.y, this.radius, this.radius);
+        System.out.println("Constructor " + getX() + " " + getY() + " " + getWidth() + " " + getHeight());
     }
 
     @Override
@@ -50,5 +53,14 @@ public class Circle extends JPanel {
         Graphics2D g2 = (Graphics2D) graphics;
         g2.setColor(this.color);
         g2.drawOval(this.x, this.y, this.radius, this.radius);
+    }
+
+    public javafx.scene.shape.Circle getCircle() {
+        return new javafx.scene.shape.Circle(this.x, this.y, this.radius);
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        repaint();
     }
 }

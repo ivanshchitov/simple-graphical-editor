@@ -1,9 +1,10 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 
 /**
  * Class handler for mouse events.
@@ -44,6 +45,14 @@ public class MouseHandler extends MouseAdapter {
      */
     public MouseHandler(JPanel paintPanel) {
         this.paintPanel = paintPanel;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Circle circle = repository.getCircle(0);
+        if (circle.getCircle().contains((double) e.getX(), (double) e.getY())) {
+            circle.setColor(Color.red);
+        }
     }
 
     @Override
@@ -88,8 +97,6 @@ public class MouseHandler extends MouseAdapter {
                 break;
             case 3:
                 paintLine(x1, y1, x2, y2, mainColor);
-                break;
-            default:
                 break;
         }
         paintPanel.revalidate();
