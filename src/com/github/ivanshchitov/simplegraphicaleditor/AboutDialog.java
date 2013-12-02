@@ -1,12 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.JFrame;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -23,6 +18,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 
     /**
      * Constructor.
+     *
      * @param owner frame - owner
      * @param modal modal or not modal dialog
      * @throws IOException if file with text about application not found
@@ -43,13 +39,14 @@ public class AboutDialog extends JDialog implements ActionListener {
 
     /**
      * Creates text area with text about application.
+     *
      * @return new text area
      * @throws IOException if file with text about application not found
      */
     private JTextArea createTextArea() throws IOException {
         String text = new String();
         Scanner in = new Scanner(new File("res/abouttext.txt"));
-        while(in.hasNext())
+        while (in.hasNext())
             text += in.nextLine() + "\r\n";
         in.close();
         JTextArea textArea = new JTextArea(text);
@@ -61,6 +58,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 
     /**
      * Creates header of text about application.
+     *
      * @return new text area
      */
     private JTextArea createHeader() {

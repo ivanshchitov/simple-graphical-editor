@@ -1,7 +1,6 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
-import javax.swing.JLayeredPane;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -40,6 +39,7 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Constructor.
+     *
      * @param paintPanel panel for painting shapes
      */
     public MouseHandler(JPanel paintPanel) {
@@ -56,10 +56,12 @@ public class MouseHandler extends MouseAdapter {
     public void mouseReleased(MouseEvent e) {
         int x1 = x, y1 = y, x2 = e.getX(), y2 = e.getY();
         if (x1 > e.getX()) {
-            x2 = x1; x1 = e.getX();
+            x2 = x1;
+            x1 = e.getX();
         }
         if (y1 > e.getY()) {
-            y2 = y1; y1 = e.getY();
+            y2 = y1;
+            y1 = e.getY();
         }
         if (drawingMode == 3) {
             paintShape(x, y, e.getX(), e.getY());
@@ -70,6 +72,7 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Paints shape by drawing mode.
+     *
      * @param x1 start x-coordinate
      * @param y1 start y-coordinate
      * @param x2 finish x-coordinate
@@ -91,12 +94,14 @@ public class MouseHandler extends MouseAdapter {
         }
         paintPanel.revalidate();
     }
+
     /**
      * Adds line in paint panel.
-     * @param x1 start x-coordinate
-     * @param y1 start y-coordinate
-     * @param x2 finish x-coordinate
-     * @param y2 finish y-coordinate
+     *
+     * @param x1    start x-coordinate
+     * @param y1    start y-coordinate
+     * @param x2    finish x-coordinate
+     * @param y2    finish y-coordinate
      * @param color color of line
      */
     private void paintLine(int x1, int y1, int x2, int y2, Color color) {
@@ -106,10 +111,11 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Adds circle in paint panel.
-     * @param x1 start x-coordinate
-     * @param y1 start y-coordinate
-     * @param x2 finish x-coordinate
-     * @param y2 finish y-coordinate
+     *
+     * @param x1    start x-coordinate
+     * @param y1    start y-coordinate
+     * @param x2    finish x-coordinate
+     * @param y2    finish y-coordinate
      * @param color color of circle
      */
     private void paintCircle(int x1, int y1, int x2, int y2, Color color) {
@@ -120,10 +126,11 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Adds rectangle in paint panel.
-     * @param x1 start x-coordinate
-     * @param y1 start y-coordinate
-     * @param x2 finish x-coordinate
-     * @param y2 finish y-coordinate
+     *
+     * @param x1    start x-coordinate
+     * @param y1    start y-coordinate
+     * @param x2    finish x-coordinate
+     * @param y2    finish y-coordinate
      * @param color color of rectangle
      */
     private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
@@ -133,6 +140,7 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Sets drawing mode for shape.
+     *
      * @param drawingMode new drawing mode
      */
     public void setDrawingMode(int drawingMode) {
@@ -141,6 +149,7 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Sets color shape.
+     *
      * @param color new color
      */
     public void setMainColor(Color color) {
@@ -149,6 +158,7 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Returns shapes repository.
+     *
      * @return repository
      */
     public ShapesRepository getRepository() {

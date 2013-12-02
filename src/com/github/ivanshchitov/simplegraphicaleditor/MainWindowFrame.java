@@ -84,6 +84,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates menu item for exit from application.
+     *
      * @return new menu item
      */
     private JMenuItem createExitMenuItem() {
@@ -99,6 +100,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates menu item for clear paint panel.
+     *
      * @return new menu item
      */
     private JMenuItem createClearMenuItem() {
@@ -118,6 +120,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates menu item for delete last rectangle.
+     *
      * @return new menu item
      */
     private JMenuItem createDeleteLastRectangleMenuItem() {
@@ -141,6 +144,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates menu item for delete last circle.
+     *
      * @return new menu item
      */
     private JMenuItem createDeleteLastCircleMenuItem() {
@@ -164,6 +168,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates menu item for delete last line.
+     *
      * @return new menu item
      */
     private JMenuItem createDeleteLastLineMenuItem() {
@@ -183,11 +188,12 @@ public class MainWindowFrame extends JFrame {
 
             }
         });
-        return  deleteLastLine;
+        return deleteLastLine;
     }
 
     /**
      * Creates menu item for displaying information about application.
+     *
      * @return new menu item
      */
     private JMenuItem createAboutMenuItem() {
@@ -220,7 +226,8 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates shape button.
-     * @param iconPath path to icon button
+     *
+     * @param iconPath  path to icon button
      * @param shapeMode drawing mode shape
      * @return new shape button
      */
@@ -255,11 +262,12 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates button with different color, placement and sizes.
-     * @param color the background color
-     * @param x  the new x-coordinate of this component
-     * @param y   the new y-coordinate of this component
+     *
+     * @param color  the background color
+     * @param x      the new x-coordinate of this component
+     * @param y      the new y-coordinate of this component
      * @param width  the new width of this component
-     * @param height  the new height of this component
+     * @param height the new height of this component
      * @return new button
      */
     private JButton createColorButton(final Color color, int x, int y, int width, int height) {
@@ -288,6 +296,7 @@ public class MainWindowFrame extends JFrame {
 
     /**
      * Creates component listener, where override componentResized method.
+     *
      * @return new component adapter
      */
     private ComponentAdapter createComponentAdapter() {

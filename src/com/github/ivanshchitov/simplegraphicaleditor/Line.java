@@ -1,7 +1,9 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Class - line object.
@@ -33,10 +35,11 @@ public class Line extends JPanel {
 
     /**
      * Constructor, which initializes all fields of class.
-     * @param x1 the first point's x coordinate.
-     * @param y1 the first point's y coordinate.
-     * @param x2 the second point's x coordinate.
-     * @param y2 the second point's y coordinate.
+     *
+     * @param x1    the first point's x coordinate.
+     * @param y1    the first point's y coordinate.
+     * @param x2    the second point's x coordinate.
+     * @param y2    the second point's y coordinate.
      * @param color color of line
      */
     public Line(int x1, int y1, int x2, int y2, Color color) {

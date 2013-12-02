@@ -1,6 +1,6 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,11 +35,12 @@ public class Rectangle extends JPanel {
 
     /**
      * Constructor, which initializes all fields of class.
-     * @param x x-coordinate
-     * @param y y-coordinate
-     * @param width width of rectangle
+     *
+     * @param x      x-coordinate
+     * @param y      y-coordinate
+     * @param width  width of rectangle
      * @param height height of rectangle
-     * @param color color of rectangle
+     * @param color  color of rectangle
      */
     public Rectangle(int x, int y, int width, int height, Color color) {
         this.x = x;

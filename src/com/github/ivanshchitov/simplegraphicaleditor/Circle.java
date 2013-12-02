@@ -1,7 +1,9 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Class - circle object.
@@ -29,10 +31,11 @@ public class Circle extends JPanel {
 
     /**
      * Constructor, which initializes all fields of class.
-     * @param x x-coordinate
-     * @param y y-coordinate
+     *
+     * @param x      x-coordinate
+     * @param y      y-coordinate
      * @param radius radius of circle
-     * @param color color of circle
+     * @param color  color of circle
      */
     public Circle(int x, int y, int radius, Color color) {
         this.x = x;

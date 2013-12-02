@@ -33,6 +33,7 @@ public class ShapesRepository {
 
     /**
      * Adds rectangle in list.
+     *
      * @param rectangle new rectangle
      */
     public void addRectangle(Rectangle rectangle) {
@@ -41,6 +42,7 @@ public class ShapesRepository {
 
     /**
      * Adds circle in list.
+     *
      * @param circle new circle
      */
     public void addCircle(Circle circle) {
@@ -49,6 +51,7 @@ public class ShapesRepository {
 
     /**
      * Adds line in list.
+     *
      * @param line new line
      */
     public void addLine(Line line) {
@@ -57,6 +60,7 @@ public class ShapesRepository {
 
     /**
      * Returns rectangle by index.
+     *
      * @param index index of rectangle
      * @return rectangle
      */
@@ -66,6 +70,7 @@ public class ShapesRepository {
 
     /**
      * Returns circle by index.
+     *
      * @param index index of circle
      * @return circle
      */
@@ -75,6 +80,7 @@ public class ShapesRepository {
 
     /**
      * Returns line by index.
+     *
      * @param index index of line
      * @return line
      */
@@ -84,6 +90,7 @@ public class ShapesRepository {
 
     /**
      * Returns count of rectangles
+     *
      * @return count of rectangles
      */
     public int getCountRectangles() {
@@ -92,6 +99,7 @@ public class ShapesRepository {
 
     /**
      * Returns count of circles
+     *
      * @return count of circles
      */
     public int getCountCircles() {
@@ -100,6 +108,7 @@ public class ShapesRepository {
 
     /**
      * Returns count of lines
+     *
      * @return count of lines
      */
     public int getCountLines() {
