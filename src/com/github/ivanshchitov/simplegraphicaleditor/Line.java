@@ -48,6 +48,8 @@ public class Line extends JPanel {
         this.x2 = x2;
         this.y2 = y2;
         this.color = color;
+        setBounds(this.x1, this.y1, Math.abs(this.x2 - this.x1), Math.abs(this.y2 - this.y1));
+        setBackground(Color.blue);
     }
 
     @Override

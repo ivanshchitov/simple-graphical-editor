@@ -42,6 +42,7 @@ public class Circle extends JPanel {
         this.y = y;
         this.radius = radius;
         this.color = color;
+        setBounds(this.x, this.y, this.radius, this.radius);
     }
 
     @Override

@@ -48,6 +48,8 @@ public class Rectangle extends JPanel {
         this.width = width;
         this.height = height;
         this.color = color;
+        setBounds(this.x, this.y, this.width, this.height);
+        setBackground(Color.red);
     }
 
     @Override
