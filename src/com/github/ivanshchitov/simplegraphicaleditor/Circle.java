@@ -1,10 +1,10 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import javafx.scene.shape.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.Rectangle;
+import java.awt.geom.RoundRectangle2D;
+
 
 /**
  * Class - circle object.
@@ -43,9 +43,7 @@ public class Circle extends JPanel {
         this.y = y;
         this.radius = radius;
         this.color = color;
-        //setBounds(this.x, this.y, this.radius * this.radius, this.radius * this.radius);
         setBounds(this.x, this.y, this.radius, this.radius);
-        System.out.println("Constructor " + getX() + " " + getY() + " " + getWidth() + " " + getHeight());
     }
 
     @Override
@@ -55,8 +53,15 @@ public class Circle extends JPanel {
         g2.drawOval(this.x, this.y, this.radius, this.radius);
     }
 
-    public javafx.scene.shape.Circle getCircle() {
-        return new javafx.scene.shape.Circle(this.x, this.y, this.radius);
+    /**
+     * Returns a rectangle that is have inscribed circle.
+     * Need to check whether misses click mouse in our circle or not.
+     * Since the whole panel with a circle stretched to the entire window.
+     *
+     * @return new rectangle that have inscribed circle
+     */
+    public java.awt.Rectangle getCircle() {
+        return new java.awt.Rectangle(this.x, this.y, this.radius, this.radius);
     }
 
     public void setColor(Color color) {

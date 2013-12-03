@@ -58,4 +58,13 @@ public class Rectangle extends JPanel {
         g2.setColor(this.color);
         g2.drawRect(this.x, this.y, this.width, this.height);
     }
+
+    public java.awt.Rectangle getRectangle() {
+        return new java.awt.Rectangle(this.x, this.y, this.width, this.height);
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        repaint();
+    }
 }

@@ -168,4 +168,20 @@ public class ShapesRepository {
     public void removeAllLines() {
         lines.clear();
     }
+
+    /**
+     * Returns list of circles.
+     * @return list of circles
+     */
+    public ArrayList<Circle> getCirclesList() {
+        return circles;
+    }
+
+    public ArrayList<Rectangle> getRectanglesList() {
+        return rectangles;
+    }
+
+    public ArrayList<Line> getLinesList() {
+        return lines;
+    }
 }

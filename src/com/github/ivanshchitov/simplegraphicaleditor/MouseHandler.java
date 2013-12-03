@@ -1,10 +1,9 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
 
 /**
  * Class handler for mouse events.
@@ -49,9 +48,15 @@ public class MouseHandler extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Circle circle = repository.getCircle(0);
-        if (circle.getCircle().contains((double) e.getX(), (double) e.getY())) {
-            circle.setColor(Color.red);
+        for (Circle circle : repository.getCirclesList()) {
+            if (circle.getCircle().contains(e.getPoint())) {
+                circle.setColor(mainColor);
+            }
+        }
+        for (Rectangle rectangle : repository.getRectanglesList()) {
+            if (rectangle.getRectangle().contains(e.getPoint())) {
+                rectangle.setColor(mainColor);
+            }
         }
     }
 

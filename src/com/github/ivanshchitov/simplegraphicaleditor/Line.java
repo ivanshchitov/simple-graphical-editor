@@ -1,5 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
+import com.sun.javafx.geom.Line2D;
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
