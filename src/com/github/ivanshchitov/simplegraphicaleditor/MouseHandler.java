@@ -1,6 +1,6 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -80,6 +80,9 @@ public class MouseHandler extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent event) {
+        if (drawingMode != 4) {
+            JOptionPane.showMessageDialog(paintPanel, "Change pointer mode.");
+        }
         // Цвет меняется не только в области круга,
         // но и в области прямоугольника, в который он вписан.
         // ЭТО ПРОБЛЕМКА. :(

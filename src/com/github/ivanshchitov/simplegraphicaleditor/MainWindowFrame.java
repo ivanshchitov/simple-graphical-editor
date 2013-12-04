@@ -231,6 +231,7 @@ public class MainWindowFrame extends JFrame {
         toolBar.add(createShapeButton("res/rect.png", 1));
         toolBar.add(createShapeButton("res/circle.png", 2));
         toolBar.add(createShapeButton("res/line.png", 3));
+        toolBar.add(createShapeButton("res/pointer.png", 4));
         toolBar.setFloatable(false);
         toolBar.setBounds(0, 0, TOOLBAR_WIDTH, getHeight());
         add(toolBar);
