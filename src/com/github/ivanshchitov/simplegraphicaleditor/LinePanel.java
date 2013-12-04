@@ -10,7 +10,7 @@ import java.awt.Graphics;
  * Date: 26.11.13
  * Time: 20:16
  */
-public class Line extends JPanel {
+public class LinePanel extends JPanel {
     /**
      * The first point's x coordinate.
      */
@@ -41,7 +41,7 @@ public class Line extends JPanel {
      * @param y2    the second point's y coordinate.
      * @param color color of line
      */
-    public Line(int x1, int y1, int x2, int y2, Color color) {
+    public LinePanel(int x1, int y1, int x2, int y2, Color color) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;

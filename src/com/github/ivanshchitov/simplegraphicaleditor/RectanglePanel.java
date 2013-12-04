@@ -10,7 +10,7 @@ import java.awt.Graphics;
  * Date: 26.11.13
  * Time: 20:02
  */
-public class Rectangle extends JPanel {
+public class RectanglePanel extends JPanel {
     /**
      * Axis X offset.
      */
@@ -41,7 +41,7 @@ public class Rectangle extends JPanel {
      * @param height height of rectangle
      * @param color  color of rectangle
      */
-    public Rectangle(int x, int y, int width, int height, Color color) {
+    public RectanglePanel(int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -57,7 +57,7 @@ public class Rectangle extends JPanel {
     }
 
     /**
-     * Returns a rectangle as java.awt.Rectangle.
+     * Returns a rectangle as java.awt.RectanglePanel.
      * Need to check whether misses click mouse in our rectangle or not.
      * Since the whole panel with a rectangle stretched to the entire window.
      *

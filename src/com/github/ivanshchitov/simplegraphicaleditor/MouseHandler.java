@@ -83,12 +83,12 @@ public class MouseHandler extends MouseAdapter {
         // Цвет меняется не только в области круга,
         // но и в области прямоугольника, в который он вписан.
         // ЭТО ПРОБЛЕМКА. :(
-        for (Circle circle : repository.getCirclesList()) {
+        for (CirclePanel circle : repository.getCirclesList()) {
             if (circle.getCircle().contains(event.getPoint())) {
                 circle.setColor(mainColor);
             }
         }
-        for (Rectangle rectangle : repository.getRectanglesList()) {
+        for (RectanglePanel rectangle : repository.getRectanglesList()) {
             if (rectangle.getRectangle().contains(event.getPoint())) {
                 rectangle.setColor(mainColor);
             }
@@ -164,7 +164,7 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of rectangle
      */
     private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
-        repository.addRectangle(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
+        repository.addRectangle(new RectanglePanel(x1, y1, x2 - x1, y2 - y1, color));
         paintPanel.add(repository.getRectangle(repository.getCountRectangles() - 1));
     }
 
@@ -178,7 +178,8 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of circle
      */
     private void paintCircle(int x1, int y1, int x2, int y2, Color color) {
-        repository.addCircle(new Circle(x1, y1, (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
+        repository.addCircle(new CirclePanel(x1, y1,
+                (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
                 + Math.pow(Math.abs(y2 - y1), 2)), color));
         paintPanel.add(repository.getCircle(repository.getCountCircles() - 1));
     }
@@ -193,7 +194,7 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of line
      */
     private void paintLine(int x1, int y1, int x2, int y2, Color color) {
-        repository.addLine(new Line(x1, y1, x2, y2, color));
+        repository.addLine(new LinePanel(x1, y1, x2, y2, color));
         paintPanel.add(repository.getLine(repository.getCountLines() - 1));
     }
 }

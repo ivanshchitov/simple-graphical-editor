@@ -12,23 +12,23 @@ public class ShapesRepository {
     /**
      * List of rectangles.
      */
-    private ArrayList<Rectangle> rectangles;
+    private ArrayList<RectanglePanel> rectangles;
     /**
      * List of circles.
      */
-    private ArrayList<Circle> circles;
+    private ArrayList<CirclePanel> circles;
     /**
      * List of lines.
      */
-    private ArrayList<Line> lines;
+    private ArrayList<LinePanel> lines;
 
     /**
      * Default constructor.
      */
     public ShapesRepository() {
-        rectangles = new ArrayList<Rectangle>(0);
-        circles = new ArrayList<Circle>(0);
-        lines = new ArrayList<Line>(0);
+        rectangles = new ArrayList<RectanglePanel>(0);
+        circles = new ArrayList<CirclePanel>(0);
+        lines = new ArrayList<LinePanel>(0);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ShapesRepository {
      *
      * @param rectangle new rectangle
      */
-    public void addRectangle(Rectangle rectangle) {
+    public void addRectangle(RectanglePanel rectangle) {
         rectangles.add(rectangle);
     }
 
@@ -45,7 +45,7 @@ public class ShapesRepository {
      *
      * @param circle new circle
      */
-    public void addCircle(Circle circle) {
+    public void addCircle(CirclePanel circle) {
         circles.add(circle);
     }
 
@@ -54,7 +54,7 @@ public class ShapesRepository {
      *
      * @param line new line
      */
-    public void addLine(Line line) {
+    public void addLine(LinePanel line) {
         lines.add(line);
     }
 
@@ -64,7 +64,7 @@ public class ShapesRepository {
      * @param index index of rectangle
      * @return rectangle
      */
-    public Rectangle getRectangle(int index) {
+    public RectanglePanel getRectangle(int index) {
         return rectangles.get(index);
     }
 
@@ -74,7 +74,7 @@ public class ShapesRepository {
      * @param index index of circle
      * @return circle
      */
-    public Circle getCircle(int index) {
+    public CirclePanel getCircle(int index) {
         return circles.get(index);
     }
 
@@ -84,7 +84,7 @@ public class ShapesRepository {
      * @param index index of line
      * @return line
      */
-    public Line getLine(int index) {
+    public LinePanel getLine(int index) {
         return lines.get(index);
     }
 
@@ -173,7 +173,7 @@ public class ShapesRepository {
      * Returns list of rectangles.
      * @return list of rectangles
      */
-    public ArrayList<Rectangle> getRectanglesList() {
+    public ArrayList<RectanglePanel> getRectanglesList() {
         return rectangles;
     }
 
@@ -181,7 +181,7 @@ public class ShapesRepository {
      * Returns list of circles.
      * @return list of circles
      */
-    public ArrayList<Circle> getCirclesList() {
+    public ArrayList<CirclePanel> getCirclesList() {
         return circles;
     }
 
@@ -189,7 +189,7 @@ public class ShapesRepository {
      * Returns list of lines.
      * @return list of lines
      */
-    public ArrayList<Line> getLinesList() {
+    public ArrayList<LinePanel> getLinesList() {
         return lines;
     }
 }

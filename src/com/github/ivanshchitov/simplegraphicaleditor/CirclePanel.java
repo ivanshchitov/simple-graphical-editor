@@ -10,7 +10,7 @@ import java.awt.Graphics;
  * Date: 26.11.13
  * Time: 19:58
  */
-public class Circle extends JPanel {
+public class CirclePanel extends JPanel {
     /**
      * Axis X offset.
      */
@@ -36,7 +36,7 @@ public class Circle extends JPanel {
      * @param radius radius of circle
      * @param color  color of circle
      */
-    public Circle(int x, int y, int radius, Color color) {
+    public CirclePanel(int x, int y, int radius, Color color) {
         this.x = x;
         this.y = y;
         this.radius = radius;
