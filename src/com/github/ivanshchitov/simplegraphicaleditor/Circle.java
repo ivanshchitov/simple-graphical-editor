@@ -61,6 +61,11 @@ public class Circle extends JPanel {
         return new java.awt.Rectangle(this.x, this.y, this.radius, this.radius);
     }
 
+    /**
+     * Sets color of circle.
+     *
+     * @param color color of circle
+     */
     public void setColor(Color color) {
         this.color = color;
         repaint();

@@ -56,10 +56,22 @@ public class Rectangle extends JPanel {
         graphics.drawRect(this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Returns a rectangle as java.awt.Rectangle.
+     * Need to check whether misses click mouse in our rectangle or not.
+     * Since the whole panel with a rectangle stretched to the entire window.
+     *
+     * @return new rectangle that have inscribed circle
+     */
     public java.awt.Rectangle getRectangle() {
         return new java.awt.Rectangle(this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Sets color of rectangle.
+     *
+     * @param color color of rectangle
+     */
     public void setColor(Color color) {
         this.color = color;
         repaint();

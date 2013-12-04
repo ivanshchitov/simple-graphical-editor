@@ -1,7 +1,7 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -73,42 +73,57 @@ public class MouseHandler extends MouseAdapter {
         return repository;
     }
 
+    /**
+     * Changes the color of a shape by clicking the mouse.
+     *
+     * @param event click-event of mouse
+     */
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent event) {
         // Цвет меняется не только в области круга,
         // но и в области прямоугольника, в который он вписан.
         // ЭТО ПРОБЛЕМКА. :(
         for (Circle circle : repository.getCirclesList()) {
-            if (circle.getCircle().contains(e.getPoint())) {
+            if (circle.getCircle().contains(event.getPoint())) {
                 circle.setColor(mainColor);
             }
         }
         for (Rectangle rectangle : repository.getRectanglesList()) {
-            if (rectangle.getRectangle().contains(e.getPoint())) {
+            if (rectangle.getRectangle().contains(event.getPoint())) {
                 rectangle.setColor(mainColor);
             }
         }
     }
 
+    /**
+     * Memorizes the coordinates where the mouse button was pressed.
+     *
+     * @param event press-event of mouse
+     */
     @Override
-    public void mousePressed(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();
+    public void mousePressed(MouseEvent event) {
+        x = event.getX();
+        y = event.getY();
     }
 
+    /**
+     * Draws a shape when the mouse button was released.
+     *
+     * @param event release-event of mouse
+     */
     @Override
-    public void mouseReleased(MouseEvent e) {
-        int x1 = x, y1 = y, x2 = e.getX(), y2 = e.getY();
-        if (x1 > e.getX()) {
+    public void mouseReleased(MouseEvent event) {
+        int x1 = x, y1 = y, x2 = event.getX(), y2 = event.getY();
+        if (x1 > event.getX()) {
             x2 = x1;
-            x1 = e.getX();
+            x1 = event.getX();
         }
-        if (y1 > e.getY()) {
+        if (y1 > event.getY()) {
             y2 = y1;
-            y1 = e.getY();
+            y1 = event.getY();
         }
         if (drawingMode == 3) {
-            paintShape(x, y, e.getX(), e.getY());
+            paintShape(x, y, event.getX(), event.getY());
         } else {
             paintShape(x1, y1, x2, y2);
         }
