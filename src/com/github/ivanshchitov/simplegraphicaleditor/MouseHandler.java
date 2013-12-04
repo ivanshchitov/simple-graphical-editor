@@ -48,6 +48,9 @@ public class MouseHandler extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        // Цвет меняется не только в области круга,
+        // но и в области прямоугольника, в который он вписан.
+        // ЭТО ПРОБЛЕМКА. :(
         for (Circle circle : repository.getCirclesList()) {
             if (circle.getCircle().contains(e.getPoint())) {
                 circle.setColor(mainColor);

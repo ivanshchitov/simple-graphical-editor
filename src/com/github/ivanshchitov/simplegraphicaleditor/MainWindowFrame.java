@@ -35,6 +35,22 @@ public class MainWindowFrame extends JFrame {
      * Mouse handler.
      */
     private MouseHandler mouseHandler;
+    /**
+     * Size of button (size == height == width).
+     */
+    private static int COLOR_BUTTON_SIZE = 18;
+    /**
+     * Width of toolbar.
+     */
+    private static int TOOLBAR_WIDTH = 40;
+    /**
+     * Height of colorbar.
+     */
+    private static int COLORBAR_HEIGHT = 30;
+    /**
+     * Interval between the color buttons.
+     */
+    private static int INTERVAL_BETWEEN_BUTTONS = 5;
 
     /**
      * Default constructor.
@@ -211,7 +227,7 @@ public class MainWindowFrame extends JFrame {
         toolBar.add(createShapeButton("res/circle.png", 2));
         toolBar.add(createShapeButton("res/line.png", 3));
         toolBar.setFloatable(false);
-        toolBar.setBounds(0, 0, 40, getHeight());
+        toolBar.setBounds(0, 0, TOOLBAR_WIDTH, getHeight());
         add(toolBar);
     }
 
@@ -240,14 +256,14 @@ public class MainWindowFrame extends JFrame {
         mainColorButton.setBackground(Color.black);
         mainColorButton.setBounds(50, 4, 21, 21);
         colorBar.add(mainColorButton);
-        colorBar.add(createColorButton(Color.red, 80, 5, 18, 18));
-        colorBar.add(createColorButton(Color.blue, 110, 5, 18, 18));
-        colorBar.add(createColorButton(Color.yellow, 140, 5, 18, 18));
-        colorBar.add(createColorButton(Color.green, 170, 5, 18, 18));
-        colorBar.add(createColorButton(Color.black, 200, 5, 18, 18));
+        colorBar.add(createColorButton(Color.red, 80, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE , COLOR_BUTTON_SIZE));
+        colorBar.add(createColorButton(Color.blue, 110, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
+        colorBar.add(createColorButton(Color.yellow, 140, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
+        colorBar.add(createColorButton(Color.green, 170, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
+        colorBar.add(createColorButton(Color.black, 200, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
         colorBar.setLayout(null);
         colorBar.setFloatable(false);
-        colorBar.setBounds(0, 0, getWidth(), 30);
+        colorBar.setBounds(0, 0, getWidth(), COLORBAR_HEIGHT);
         add(colorBar);
     }
 
@@ -294,8 +310,8 @@ public class MainWindowFrame extends JFrame {
         return new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                toolBar.setBounds(0, 0, 40, e.getComponent().getHeight());
-                colorBar.setBounds(0, 0, e.getComponent().getWidth(), 30);
+                toolBar.setBounds(0, 0, TOOLBAR_WIDTH, e.getComponent().getHeight());
+                colorBar.setBounds(0, 0, e.getComponent().getWidth(), COLORBAR_HEIGHT);
                 paintPanel.setBounds(toolBar.getWidth(), colorBar.getHeight(),
                         e.getComponent().getWidth(), e.getComponent().getHeight());
                 paintPanel.revalidate();
