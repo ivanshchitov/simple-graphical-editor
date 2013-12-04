@@ -170,6 +170,14 @@ public class ShapesRepository {
     }
 
     /**
+     * Returns list of rectangles.
+     * @return list of rectangles
+     */
+    public ArrayList<Rectangle> getRectanglesList() {
+        return rectangles;
+    }
+
+    /**
      * Returns list of circles.
      * @return list of circles
      */
@@ -177,10 +185,10 @@ public class ShapesRepository {
         return circles;
     }
 
-    public ArrayList<Rectangle> getRectanglesList() {
-        return rectangles;
-    }
-
+    /**
+     * Returns list of lines.
+     * @return list of lines
+     */
     public ArrayList<Line> getLinesList() {
         return lines;
     }

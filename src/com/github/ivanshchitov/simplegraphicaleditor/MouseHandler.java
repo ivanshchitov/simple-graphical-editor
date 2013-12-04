@@ -46,6 +46,33 @@ public class MouseHandler extends MouseAdapter {
         this.paintPanel = paintPanel;
     }
 
+    /**
+     * Sets drawing mode for shape.
+     *
+     * @param drawingMode new drawing mode
+     */
+    public void setDrawingMode(int drawingMode) {
+        this.drawingMode = drawingMode;
+    }
+
+    /**
+     * Sets color shape.
+     *
+     * @param color new color
+     */
+    public void setMainColor(Color color) {
+        this.mainColor = color;
+    }
+
+    /**
+     * Returns shapes repository.
+     *
+     * @return repository
+     */
+    public ShapesRepository getRepository() {
+        return repository;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         // Цвет меняется не только в области круга,
@@ -106,22 +133,24 @@ public class MouseHandler extends MouseAdapter {
             case 3:
                 paintLine(x1, y1, x2, y2, mainColor);
                 break;
+            default:
+                break;
         }
         paintPanel.revalidate();
     }
 
     /**
-     * Adds line in paint panel.
+     * Adds rectangle in paint panel.
      *
      * @param x1    start x-coordinate
      * @param y1    start y-coordinate
      * @param x2    finish x-coordinate
      * @param y2    finish y-coordinate
-     * @param color color of line
+     * @param color color of rectangle
      */
-    private void paintLine(int x1, int y1, int x2, int y2, Color color) {
-        repository.addLine(new Line(x1, y1, x2, y2, color));
-        paintPanel.add(repository.getLine(repository.getCountLines() - 1));
+    private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
+        repository.addRectangle(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
+        paintPanel.add(repository.getRectangle(repository.getCountRectangles() - 1));
     }
 
     /**
@@ -140,43 +169,16 @@ public class MouseHandler extends MouseAdapter {
     }
 
     /**
-     * Adds rectangle in paint panel.
+     * Adds line in paint panel.
      *
      * @param x1    start x-coordinate
      * @param y1    start y-coordinate
      * @param x2    finish x-coordinate
      * @param y2    finish y-coordinate
-     * @param color color of rectangle
+     * @param color color of line
      */
-    private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
-        repository.addRectangle(new Rectangle(x1, y1, x2 - x1, y2 - y1, color));
-        paintPanel.add(repository.getRectangle(repository.getCountRectangles() - 1));
-    }
-
-    /**
-     * Sets drawing mode for shape.
-     *
-     * @param drawingMode new drawing mode
-     */
-    public void setDrawingMode(int drawingMode) {
-        this.drawingMode = drawingMode;
-    }
-
-    /**
-     * Sets color shape.
-     *
-     * @param color new color
-     */
-    public void setMainColor(Color color) {
-        this.mainColor = color;
-    }
-
-    /**
-     * Returns shapes repository.
-     *
-     * @return repository
-     */
-    public ShapesRepository getRepository() {
-        return repository;
+    private void paintLine(int x1, int y1, int x2, int y2, Color color) {
+        repository.addLine(new Line(x1, y1, x2, y2, color));
+        paintPanel.add(repository.getLine(repository.getCountLines() - 1));
     }
 }

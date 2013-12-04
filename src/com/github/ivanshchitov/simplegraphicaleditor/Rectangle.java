@@ -3,7 +3,6 @@ package com.github.ivanshchitov.simplegraphicaleditor;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 /**
  * Class - rectangle object.
@@ -49,14 +48,12 @@ public class Rectangle extends JPanel {
         this.height = height;
         this.color = color;
         setBounds(this.x, this.y, this.width, this.height);
-        setBackground(Color.red);
     }
 
     @Override
-    public void paint(Graphics graphics) {
-        Graphics2D g2 = (Graphics2D) graphics;
-        g2.setColor(this.color);
-        g2.drawRect(this.x, this.y, this.width, this.height);
+    public void paintComponent(Graphics graphics) {
+        graphics.setColor(this.color);
+        graphics.drawRect(this.x, this.y, this.width, this.height);
     }
 
     public java.awt.Rectangle getRectangle() {

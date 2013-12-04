@@ -1,10 +1,8 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.Rectangle;
-import java.awt.geom.RoundRectangle2D;
-
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * Class - circle object.
@@ -47,10 +45,9 @@ public class Circle extends JPanel {
     }
 
     @Override
-    public void paint(Graphics graphics) {
-        Graphics2D g2 = (Graphics2D) graphics;
-        g2.setColor(this.color);
-        g2.drawOval(this.x, this.y, this.radius, this.radius);
+    public void paintComponent(Graphics graphics) {
+        graphics.setColor(this.color);
+        graphics.drawOval(this.x, this.y, this.radius, this.radius);
     }
 
     /**

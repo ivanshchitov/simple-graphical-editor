@@ -47,10 +47,6 @@ public class MainWindowFrame extends JFrame {
      * Height of colorbar.
      */
     private static int COLORBAR_HEIGHT = 30;
-    /**
-     * Interval between the color buttons.
-     */
-    private static int INTERVAL_BETWEEN_BUTTONS = 5;
 
     /**
      * Default constructor.
@@ -90,22 +86,6 @@ public class MainWindowFrame extends JFrame {
     }
 
     /**
-     * Creates menu item for exit from application.
-     *
-     * @return new menu item
-     */
-    private JMenuItem createExitMenuItem() {
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        return exitMenuItem;
-    }
-
-    /**
      * Creates menu item for clear paint panel.
      *
      * @return new menu item
@@ -123,6 +103,22 @@ public class MainWindowFrame extends JFrame {
             }
         });
         return clearMenuItem;
+    }
+
+    /**
+     * Creates menu item for exit from application.
+     *
+     * @return new menu item
+     */
+    private JMenuItem createExitMenuItem() {
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        return exitMenuItem;
     }
 
     /**
@@ -256,11 +252,11 @@ public class MainWindowFrame extends JFrame {
         mainColorButton.setBackground(Color.black);
         mainColorButton.setBounds(50, 4, 21, 21);
         colorBar.add(mainColorButton);
-        colorBar.add(createColorButton(Color.red, 80, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE , COLOR_BUTTON_SIZE));
-        colorBar.add(createColorButton(Color.blue, 110, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
-        colorBar.add(createColorButton(Color.yellow, 140, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
-        colorBar.add(createColorButton(Color.green, 170, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
-        colorBar.add(createColorButton(Color.black, 200, INTERVAL_BETWEEN_BUTTONS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE));
+        colorBar.add(createColorButton(80, 5, COLOR_BUTTON_SIZE , COLOR_BUTTON_SIZE, Color.red));
+        colorBar.add(createColorButton(110, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.blue));
+        colorBar.add(createColorButton(140, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.yellow));
+        colorBar.add(createColorButton(170, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.green));
+        colorBar.add(createColorButton(200, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.black));
         colorBar.setLayout(null);
         colorBar.setFloatable(false);
         colorBar.setBounds(0, 0, getWidth(), COLORBAR_HEIGHT);
@@ -277,7 +273,7 @@ public class MainWindowFrame extends JFrame {
      * @param height the new height of this component
      * @return new button
      */
-    private JButton createColorButton(final Color color, int x, int y, int width, int height) {
+    private JButton createColorButton(int x, int y, int width, int height, final Color color) {
         JButton button = new JButton();
         button.setBackground(color);
         button.setBounds(x, y, width, height);

@@ -1,11 +1,8 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import com.sun.javafx.geom.Line2D;
-
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 /**
  * Class - line object.
@@ -51,13 +48,11 @@ public class Line extends JPanel {
         this.y2 = y2;
         this.color = color;
         setBounds(this.x1, this.y1, Math.abs(this.x2 - this.x1), Math.abs(this.y2 - this.y1));
-        setBackground(Color.blue);
     }
 
     @Override
     public void paintComponent(Graphics graphics) {
-        Graphics2D g2 = (Graphics2D) graphics;
-        g2.setColor(this.color);
-        g2.drawLine(this.x1, this.y1, this.x2, this.y2);
+        graphics.setColor(this.color);
+        graphics.drawLine(this.x1, this.y1, this.x2, this.y2);
     }
 }
