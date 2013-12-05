@@ -80,7 +80,7 @@ public class MouseHandler extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent event) {
-        if (drawingMode != 4) {
+        if(isWrongDrawingMode()) {
             JOptionPane.showMessageDialog(paintPanel, "Change pointer mode.");
         }
         // Цвет меняется не только в области круга,
@@ -199,5 +199,19 @@ public class MouseHandler extends MouseAdapter {
     private void paintLine(int x1, int y1, int x2, int y2, Color color) {
         repository.addLine(new LinePanel(x1, y1, x2, y2, color));
         paintPanel.add(repository.getLine(repository.getCountLines() - 1));
+    }
+
+    private boolean isWrongDrawingMode() {
+        if (drawingMode == 1) {
+            paintPanel.remove(repository.getRectangle(repository.getCountRectangles() - 1));
+            repository.removeLastRectangle();
+            return true;
+        }
+        if (drawingMode == 2) {
+            paintPanel.remove(repository.getCircle(repository.getCountCircles() - 1));
+            repository.removeLastCircle();
+            return true;
+        }
+        return false;
     }
 }
