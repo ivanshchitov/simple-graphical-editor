@@ -1,8 +1,12 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  * Class - circle object.
@@ -27,6 +31,10 @@ public class CirclePanel extends JPanel {
      * Color of circle.
      */
     private Color color;
+    /**
+     * Container of listener.
+     */
+    private transient ArrayList changeListenerList;
 
     /**
      * Constructor, which initializes all fields of class.
@@ -41,7 +49,6 @@ public class CirclePanel extends JPanel {
         this.y = y;
         this.radius = radius;
         this.color = color;
-        setBounds(this.x, this.y, this.radius, this.radius);
     }
 
     @Override
@@ -51,14 +58,14 @@ public class CirclePanel extends JPanel {
     }
 
     /**
-     * Returns a rectangle that is have inscribed circle.
-     * Need to check whether misses click mouse in our circle or not.
-     * Since the whole panel with a circle stretched to the entire window.
-     *
-     * @return new rectangle that have inscribed circle
+     * Returns true if Circle contains the point.
+     * @param point two-dimensional point
+     * @return      contains or not
      */
-    public java.awt.Rectangle getCircle() {
-        return new java.awt.Rectangle(this.x, this.y, this.radius, this.radius);
+    public boolean isContains(Point point) {
+        return Math.pow((point.getX() - (this.x + this.radius / 2)), 2)
+               + Math.pow((point.getY() - (this.y + this.radius / 2)), 2)
+               <= Math.pow(this.radius / 2, 2);
     }
 
     /**
@@ -68,6 +75,36 @@ public class CirclePanel extends JPanel {
      */
     public void setColor(Color color) {
         this.color = color;
-        repaint();
+        fireStateChanged(new ChangeEvent(this));
+    }
+
+    /**
+     * Adds listeners for this model.
+     *
+     * @param listener listener for this model.
+     */
+    @SuppressWarnings("unchecked")
+    public synchronized void addChangeListener(ChangeListener listener) {
+        if (changeListenerList == null) {
+            changeListenerList = new ArrayList();
+        }
+        changeListenerList.add(listener);
+    }
+
+    /**
+     * Notice the listeners about the event.
+     *
+     * @param event enter event
+     */
+    private void fireStateChanged(ChangeEvent event) {
+        ArrayList list;
+        synchronized (this) {
+            if (changeListenerList == null)
+                return;
+            list = (ArrayList)changeListenerList.clone();
+        }
+        for (int i = 0; i < list.size(); i++) {
+            ((ChangeListener)list.get(i)).stateChanged(event);
+        }
     }
 }

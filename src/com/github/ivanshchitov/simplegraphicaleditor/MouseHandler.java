@@ -1,6 +1,9 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -82,18 +85,21 @@ public class MouseHandler extends MouseAdapter {
     public void mouseClicked(MouseEvent event) {
         if(isWrongDrawingMode()) {
             JOptionPane.showMessageDialog(paintPanel, "Change pointer mode.");
+            return;
         }
-        // Цвет меняется не только в области круга,
-        // но и в области прямоугольника, в который он вписан.
-        // ЭТО ПРОБЛЕМКА. :(
+        for (RectanglePanel rectangle : repository.getRectanglesList()) {
+            if (rectangle.isContains(event.getPoint())) {
+                rectangle.setColor(mainColor);
+            }
+        }
         for (CirclePanel circle : repository.getCirclesList()) {
-            if (circle.getCircle().contains(event.getPoint())) {
+            if (circle.isContains(event.getPoint())) {
                 circle.setColor(mainColor);
             }
         }
-        for (RectanglePanel rectangle : repository.getRectanglesList()) {
-            if (rectangle.getRectangle().contains(event.getPoint())) {
-                rectangle.setColor(mainColor);
+        for (LinePanel line : repository.getLinesList()) {
+            if (line.isContains(event.getPoint())) {
+                line.setColor(mainColor);
             }
         }
     }
@@ -167,7 +173,14 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of rectangle
      */
     private void paintRectangle(int x1, int y1, int x2, int y2, Color color) {
-        repository.addRectangle(new RectanglePanel(x1, y1, x2 - x1, y2 - y1, color));
+        RectanglePanel rectanglePanel = new RectanglePanel(x1, y1, x2 - x1, y2 - y1, color);
+        rectanglePanel.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                paintPanel.repaint();
+            }
+        });
+        repository.addRectangle(rectanglePanel);
         paintPanel.add(repository.getRectangle(repository.getCountRectangles() - 1));
     }
 
@@ -181,9 +194,16 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of circle
      */
     private void paintCircle(int x1, int y1, int x2, int y2, Color color) {
-        repository.addCircle(new CirclePanel(x1, y1,
+        CirclePanel circlePanel = new CirclePanel(x1, y1,
                 (int) Math.sqrt(Math.pow(Math.abs(x2 - x1), 2)
-                + Math.pow(Math.abs(y2 - y1), 2)), color));
+                        + Math.pow(Math.abs(y2 - y1), 2)), color);
+        circlePanel.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                paintPanel.repaint();
+            }
+        });
+        repository.addCircle(circlePanel);
         paintPanel.add(repository.getCircle(repository.getCountCircles() - 1));
     }
 
@@ -197,21 +217,39 @@ public class MouseHandler extends MouseAdapter {
      * @param color color of line
      */
     private void paintLine(int x1, int y1, int x2, int y2, Color color) {
-        repository.addLine(new LinePanel(x1, y1, x2, y2, color));
+        LinePanel linePanel = new LinePanel(x1, y1, x2, y2, color);
+        linePanel.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                paintPanel.repaint();
+            }
+        });
+        repository.addLine(linePanel);
         paintPanel.add(repository.getLine(repository.getCountLines() - 1));
     }
 
+    /**
+     * Returns true when choose one of the drawing modes,
+     * and returns false when choose pointer mode.
+     *
+     * @return is drawing mode or pointer mode
+     */
     private boolean isWrongDrawingMode() {
-        if (drawingMode == 1) {
-            paintPanel.remove(repository.getRectangle(repository.getCountRectangles() - 1));
-            repository.removeLastRectangle();
-            return true;
+        switch (drawingMode) {
+            case 1:
+                paintPanel.remove(repository.getRectangle(repository.getCountRectangles() - 1));
+                repository.removeLastRectangle();
+                return true;
+            case 2:
+                paintPanel.remove(repository.getCircle(repository.getCountCircles() - 1));
+                repository.removeLastCircle();
+                return true;
+            case 3:
+                paintPanel.remove(repository.getLine(repository.getCountLines() - 1));
+                repository.removeLastLine();
+                return true;
+            default:
+                return false;
         }
-        if (drawingMode == 2) {
-            paintPanel.remove(repository.getCircle(repository.getCountCircles() - 1));
-            repository.removeLastCircle();
-            return true;
-        }
-        return false;
     }
 }
