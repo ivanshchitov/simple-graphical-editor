@@ -71,6 +71,20 @@ public class RectanglePanel extends JPanel {
      */
     public void setColor(Color color) {
         this.color = color;
+        setOpaque(false);
+        fireStateChanged(new ChangeEvent(this));
+    }
+
+    /**
+     * Sets a new coordinates.
+     *
+     * @param x new x-coordinate
+     * @param y new-y coordinate
+     */
+    public void setCoordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+        setOpaque(false);
         fireStateChanged(new ChangeEvent(this));
     }
 
@@ -78,13 +92,13 @@ public class RectanglePanel extends JPanel {
      * Returns true if Rectangle contains the point.
      *
      * @param point two-dimensional point
-     * @return      contains or not
+     * @return contains or not
      */
     public boolean isContains(Point point) {
         return point.getX() >= this.x
-               & point.getX() <= this.x + this.width
-               & point.getY() >= this.y
-               & point.getY() <= this.y + this.height;
+                & point.getX() <= this.x + this.width
+                & point.getY() >= this.y
+                & point.getY() <= this.y + this.height;
     }
 
     /**
@@ -110,10 +124,10 @@ public class RectanglePanel extends JPanel {
         synchronized (this) {
             if (changeListenerList == null)
                 return;
-            list = (ArrayList)changeListenerList.clone();
+            list = (ArrayList) changeListenerList.clone();
         }
         for (int i = 0; i < list.size(); i++) {
-            ((ChangeListener)list.get(i)).stateChanged(event);
+            ((ChangeListener) list.get(i)).stateChanged(event);
         }
     }
 }

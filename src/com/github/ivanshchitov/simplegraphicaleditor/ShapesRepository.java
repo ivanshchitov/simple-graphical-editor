@@ -171,6 +171,7 @@ public class ShapesRepository {
 
     /**
      * Returns list of rectangles.
+     *
      * @return list of rectangles
      */
     public ArrayList<RectanglePanel> getRectanglesList() {
@@ -179,6 +180,7 @@ public class ShapesRepository {
 
     /**
      * Returns list of circles.
+     *
      * @return list of circles
      */
     public ArrayList<CirclePanel> getCirclesList() {
@@ -187,6 +189,7 @@ public class ShapesRepository {
 
     /**
      * Returns list of lines.
+     *
      * @return list of lines
      */
     public ArrayList<LinePanel> getLinesList() {

@@ -18,11 +18,11 @@ public class CirclePanel extends JPanel {
     /**
      * Axis X offset.
      */
-    private final int x;
+    private int x;
     /**
      * Axis Y offset.
      */
-    private final int y;
+    private int y;
     /**
      * Radius of circle.
      */
@@ -59,13 +59,14 @@ public class CirclePanel extends JPanel {
 
     /**
      * Returns true if Circle contains the point.
+     *
      * @param point two-dimensional point
-     * @return      contains or not
+     * @return contains or not
      */
     public boolean isContains(Point point) {
         return Math.pow((point.getX() - (this.x + this.radius / 2)), 2)
-               + Math.pow((point.getY() - (this.y + this.radius / 2)), 2)
-               <= Math.pow(this.radius / 2, 2);
+                + Math.pow((point.getY() - (this.y + this.radius / 2)), 2)
+                <= Math.pow(this.radius / 2, 2);
     }
 
     /**
@@ -75,6 +76,20 @@ public class CirclePanel extends JPanel {
      */
     public void setColor(Color color) {
         this.color = color;
+        setOpaque(false);
+        fireStateChanged(new ChangeEvent(this));
+    }
+
+    /**
+     * Sets a new coordinates.
+     *
+     * @param x new x-coordinate
+     * @param y new-y coordinate
+     */
+    public void setCoordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+        setOpaque(false);
         fireStateChanged(new ChangeEvent(this));
     }
 
@@ -101,10 +116,10 @@ public class CirclePanel extends JPanel {
         synchronized (this) {
             if (changeListenerList == null)
                 return;
-            list = (ArrayList)changeListenerList.clone();
+            list = (ArrayList) changeListenerList.clone();
         }
         for (int i = 0; i < list.size(); i++) {
-            ((ChangeListener)list.get(i)).stateChanged(event);
+            ((ChangeListener) list.get(i)).stateChanged(event);
         }
     }
 }

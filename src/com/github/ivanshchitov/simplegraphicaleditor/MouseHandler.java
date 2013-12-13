@@ -1,12 +1,16 @@
 package com.github.ivanshchitov.simplegraphicaleditor;
 
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Class handler for mouse events.
@@ -14,7 +18,7 @@ import java.awt.event.MouseEvent;
  * Date: 27.11.13
  * Time: 20:47
  */
-public class MouseHandler extends MouseAdapter {
+public class MouseHandler extends MouseAdapter implements MouseMotionListener {
     /**
      * X-coordinate to painting shape.
      */
@@ -39,14 +43,23 @@ public class MouseHandler extends MouseAdapter {
      * Repository of shape.
      */
     private ShapesRepository repository = new ShapesRepository();
+    /**
+     * Frame of main window.
+     */
+    private JFrame frame;
+
+    private JPanel movingElement;
+
+    private int indexOfMovingElement;
 
     /**
      * Constructor.
      *
      * @param paintPanel panel for painting shapes
      */
-    public MouseHandler(JPanel paintPanel) {
+    public MouseHandler(JFrame frame, JPanel paintPanel) {
         this.paintPanel = paintPanel;
+        this.frame = frame;
     }
 
     /**
@@ -83,7 +96,7 @@ public class MouseHandler extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent event) {
-        if(isWrongDrawingMode()) {
+        if (isWrongDrawingMode()) {
             JOptionPane.showMessageDialog(paintPanel, "Change pointer mode.");
             return;
         }
@@ -113,6 +126,31 @@ public class MouseHandler extends MouseAdapter {
     public void mousePressed(MouseEvent event) {
         x = event.getX();
         y = event.getY();
+        indexOfMovingElement = 0;
+        movingElement = null;
+        chooseMovingElement(event.getPoint());
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent event) {
+        if (drawingMode == 4) {
+            Component comp = (Component) event.getSource();
+            if (movingElement instanceof RectanglePanel) {
+                repository.getRectangle(indexOfMovingElement).setCoordinates(
+                        comp.getX() + event.getX(), comp.getY() + event.getY());
+            }
+            if (movingElement instanceof CirclePanel) {
+                repository.getCircle(indexOfMovingElement).setCoordinates(
+                        comp.getX() + event.getX(), comp.getY() + event.getY());
+            }
+            if (movingElement instanceof LinePanel) {
+                repository.getLine(indexOfMovingElement).setCoordinates(
+                        comp.getX() + event.getX(),
+                        comp.getY() + event.getY(),
+                        comp.getX() + event.getX() + repository.getLine(indexOfMovingElement).getDistanceBetweenPointsX(),
+                        comp.getY() + event.getY() + repository.getLine(indexOfMovingElement).getDistanceBetweenPointsY());
+            }
+        }
     }
 
     /**
@@ -133,9 +171,10 @@ public class MouseHandler extends MouseAdapter {
         }
         if (drawingMode == 3) {
             paintShape(x, y, event.getX(), event.getY());
-        } else {
+        } else if (drawingMode == 1 || drawingMode == 2) {
             paintShape(x1, y1, x2, y2);
         }
+        x = 0; y = 0;
     }
 
     /**
@@ -160,7 +199,7 @@ public class MouseHandler extends MouseAdapter {
             default:
                 break;
         }
-        paintPanel.revalidate();
+        frame.revalidate();
     }
 
     /**
@@ -177,7 +216,7 @@ public class MouseHandler extends MouseAdapter {
         rectanglePanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                paintPanel.repaint();
+                frame.repaint();
             }
         });
         repository.addRectangle(rectanglePanel);
@@ -200,7 +239,7 @@ public class MouseHandler extends MouseAdapter {
         circlePanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                paintPanel.repaint();
+                frame.repaint();
             }
         });
         repository.addCircle(circlePanel);
@@ -221,7 +260,7 @@ public class MouseHandler extends MouseAdapter {
         linePanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                paintPanel.repaint();
+                frame.repaint();
             }
         });
         repository.addLine(linePanel);
@@ -250,6 +289,32 @@ public class MouseHandler extends MouseAdapter {
                 return true;
             default:
                 return false;
+        }
+    }
+
+    /**
+     * Selects the element that contains the point which was pressed.
+     *
+     * @param point point which was pressed
+     */
+    private void chooseMovingElement(Point point) {
+        for (RectanglePanel rectangle : repository.getRectanglesList()) {
+            if (rectangle.isContains(point)) {
+                movingElement = rectangle;
+                indexOfMovingElement = repository.getRectanglesList().indexOf(rectangle);
+            }
+        }
+        for (CirclePanel circle : repository.getCirclesList()) {
+            if (circle.isContains(point)) {
+                movingElement = circle;
+                indexOfMovingElement = repository.getCirclesList().indexOf(circle);
+            }
+        }
+        for (LinePanel line : repository.getLinesList()) {
+            if (line.isContains(point)) {
+                movingElement = line;
+                indexOfMovingElement = repository.getLinesList().indexOf(line);
+            }
         }
     }
 }

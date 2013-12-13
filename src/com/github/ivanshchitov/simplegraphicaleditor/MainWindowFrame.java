@@ -67,8 +67,9 @@ public class MainWindowFrame extends JFrame {
         initShapeToolBar();
         initColorToolBar();
         initPaintPanel();
-        mouseHandler = new MouseHandler(paintPanel);
+        mouseHandler = new MouseHandler(this, paintPanel);
         paintPanel.addMouseListener(mouseHandler);
+        paintPanel.addMouseMotionListener(mouseHandler);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addComponentListener(createComponentAdapter());
         setVisible(true);
@@ -262,7 +263,7 @@ public class MainWindowFrame extends JFrame {
         mainColorButton.setBackground(Color.black);
         mainColorButton.setBounds(50, 4, 21, 21);
         colorBar.add(mainColorButton);
-        colorBar.add(createColorButton(80, 5, COLOR_BUTTON_SIZE , COLOR_BUTTON_SIZE, Color.red));
+        colorBar.add(createColorButton(80, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.red));
         colorBar.add(createColorButton(110, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.blue));
         colorBar.add(createColorButton(140, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.yellow));
         colorBar.add(createColorButton(170, 5, COLOR_BUTTON_SIZE, COLOR_BUTTON_SIZE, Color.green));
@@ -320,7 +321,7 @@ public class MainWindowFrame extends JFrame {
                 colorBar.setBounds(0, 0, e.getComponent().getWidth(), COLORBAR_HEIGHT);
                 paintPanel.setBounds(toolBar.getWidth(), colorBar.getHeight(),
                         e.getComponent().getWidth(), e.getComponent().getHeight());
-                paintPanel.revalidate();
+                //paintPanel.revalidate();
             }
         };
     }

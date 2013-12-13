@@ -18,19 +18,19 @@ public class LinePanel extends JPanel {
     /**
      * The first point's x coordinate.
      */
-    private final int x1;
+    private int x1;
     /**
      * The first point's y coordinate.
      */
-    private final int y1;
+    private int y1;
     /**
      * The second point's x coordinate.
      */
-    private final int x2;
+    private int x2;
     /**
      * The second point's y coordinate.
      */
-    private final int y2;
+    private int y2;
     /**
      * Color of line.
      */
@@ -67,10 +67,44 @@ public class LinePanel extends JPanel {
      * Sets color of rectangle.
      *
      * @param color color of line
-    */
+     */
     public void setColor(Color color) {
         this.color = color;
+        setOpaque(false);
         fireStateChanged(new ChangeEvent(this));
+    }
+
+    /**
+     * Sets a new coordinates.
+     *
+     * @param x1 new x-coordinate
+     * @param y1 new-y coordinate
+     */
+    public void setCoordinates(int x1, int y1, int x2, int y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        setOpaque(false);
+        fireStateChanged(new ChangeEvent(this));
+    }
+
+    /**
+     * Returns distance between points x1 and x2.
+     *
+     * @return distance
+     */
+    public int getDistanceBetweenPointsX() {
+        return Math.abs(this.x1 - this.x2);
+    }
+
+    /**
+     * Returns distance between points y1 and y2.
+     *
+     * @return distance
+     */
+    public int getDistanceBetweenPointsY() {
+        return Math.abs(this.y1 - this.y2);
     }
 
     /**
@@ -79,7 +113,7 @@ public class LinePanel extends JPanel {
      * (x - x1)/(x2 - x1) == (y - y1)/(y2 - y1).
      *
      * @param point two-dimensional point
-     * @return      contains or not
+     * @return contains or not
      */
     public boolean isContains(Point point) {
         double right = roundNumber((point.getX() - x1) / (x2 - x1), 2);
@@ -92,13 +126,13 @@ public class LinePanel extends JPanel {
      *
      * @param number  our number
      * @param precise number of decimal places
-     * @return        new number
+     * @return new number
      */
     public double roundNumber(double number, int precise) {
-        precise = 10^precise;
-        number = number*precise;
+        precise = 10 ^ precise;
+        number = number * precise;
         int i = (int) Math.round(number);
-        return (double) i/precise;
+        return (double) i / precise;
     }
 
     /**
@@ -124,10 +158,10 @@ public class LinePanel extends JPanel {
         synchronized (this) {
             if (changeListenerList == null)
                 return;
-            list = (ArrayList)changeListenerList.clone();
+            list = (ArrayList) changeListenerList.clone();
         }
         for (int i = 0; i < list.size(); i++) {
-            ((ChangeListener)list.get(i)).stateChanged(event);
+            ((ChangeListener) list.get(i)).stateChanged(event);
         }
     }
 }
